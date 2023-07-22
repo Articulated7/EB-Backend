@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/scheduler/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/scheduler/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/scheduler",
+  "projects": {
+    "scheduler": {
+      "type": "application",
+      "root": "apps/scheduler",
+      "entryFile": "main",
+      "sourceRoot": "apps/scheduler/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/scheduler/tsconfig.app.json"
+      }
+    },
+    "status-sync": {
+      "type": "application",
+      "root": "apps/status-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/status-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/status-sync/tsconfig.app.json"
+      }
+    },
+    "alliance-sync": {
+      "type": "application",
+      "root": "apps/alliance-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/alliance-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/alliance-sync/tsconfig.app.json"
+      }
+    },
+    "assets-sync": {
+      "type": "application",
+      "root": "apps/assets-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/assets-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/assets-sync/tsconfig.app.json"
+      }
+    },
+    "bookmark-sync": {
+      "type": "application",
+      "root": "apps/bookmark-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/bookmark-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/bookmark-sync/tsconfig.app.json"
+      }
+    },
+    "calendar-sync": {
+      "type": "application",
+      "root": "apps/calendar-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/calendar-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/calendar-sync/tsconfig.app.json"
+      }
+    },
+    "character-sync": {
+      "type": "application",
+      "root": "apps/character-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/character-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/character-sync/tsconfig.app.json"
+      }
+    },
+    "clone-sync": {
+      "type": "application",
+      "root": "apps/clone-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/clone-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/clone-sync/tsconfig.app.json"
+      }
+    },
+    "contact-sync": {
+      "type": "application",
+      "root": "apps/contact-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/contact-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/contact-sync/tsconfig.app.json"
+      }
+    },
+    "corporation-sync": {
+      "type": "application",
+      "root": "apps/corporation-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/corporation-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/corporation-sync/tsconfig.app.json"
+      }
+    },
+    "dogma-sync": {
+      "type": "application",
+      "root": "apps/dogma-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/dogma-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/dogma-sync/tsconfig.app.json"
+      }
+    },
+    "fw-sync": {
+      "type": "application",
+      "root": "apps/fw-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/fw-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fw-sync/tsconfig.app.json"
+      }
+    },
+    "fitting-sync": {
+      "type": "application",
+      "root": "apps/fitting-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/fitting-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fitting-sync/tsconfig.app.json"
+      }
+    },
+    "fleet-sync": {
+      "type": "application",
+      "root": "apps/fleet-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/fleet-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fleet-sync/tsconfig.app.json"
+      }
+    },
+    "incursion-sync": {
+      "type": "application",
+      "root": "apps/incursion-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/incursion-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/incursion-sync/tsconfig.app.json"
+      }
+    },
+    "industry-sync": {
+      "type": "application",
+      "root": "apps/industry-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/industry-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/industry-sync/tsconfig.app.json"
+      }
+    },
+    "killmail-sync": {
+      "type": "application",
+      "root": "apps/killmail-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/killmail-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/killmail-sync/tsconfig.app.json"
+      }
+    },
+    "location-sync": {
+      "type": "application",
+      "root": "apps/location-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/location-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/location-sync/tsconfig.app.json"
+      }
+    },
+    "loyalty-sync": {
+      "type": "application",
+      "root": "apps/loyalty-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/loyalty-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/loyalty-sync/tsconfig.app.json"
+      }
+    },
+    "mail-sync": {
+      "type": "application",
+      "root": "apps/mail-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/mail-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mail-sync/tsconfig.app.json"
+      }
+    },
+    "market-sync": {
+      "type": "application",
+      "root": "apps/market-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/market-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/market-sync/tsconfig.app.json"
+      }
+    },
+    "opportunity-sync": {
+      "type": "application",
+      "root": "apps/opportunity-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/opportunity-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/opportunity-sync/tsconfig.app.json"
+      }
+    },
+    "pi-sync": {
+      "type": "application",
+      "root": "apps/pi-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/pi-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/pi-sync/tsconfig.app.json"
+      }
+    },
+    "skill-sync": {
+      "type": "application",
+      "root": "apps/skill-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/skill-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/skill-sync/tsconfig.app.json"
+      }
+    },
+    "sov-sync": {
+      "type": "application",
+      "root": "apps/sov-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/sov-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sov-sync/tsconfig.app.json"
+      }
+    },
+    "universe-sync": {
+      "type": "application",
+      "root": "apps/universe-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/universe-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/universe-sync/tsconfig.app.json"
+      }
+    },
+    "wallet-sync": {
+      "type": "application",
+      "root": "apps/wallet-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/wallet-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wallet-sync/tsconfig.app.json"
+      }
+    },
+    "war-sync": {
+      "type": "application",
+      "root": "apps/war-sync",
+      "entryFile": "main",
+      "sourceRoot": "apps/war-sync/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/war-sync/tsconfig.app.json"
+      }
+    }
+  }
+}
