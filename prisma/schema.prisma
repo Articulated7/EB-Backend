@@ -869,7 +869,6 @@ model Corporation {
   CorporationWalletDivisionTransaction CorporationWalletDivisionTransaction[]
   LoyaltyStoreOffer                    LoyaltyStoreOffer[]
   SovereigntyMap                       SovereigntyMap[]
-  Factions                             Factions[]
 }
 
 model CorporationAlliancehistory {
@@ -1660,9 +1659,9 @@ model Bloodline {
 
 model Categories {
   CategoryId Int      @id
-  Group      Json?
-  Name       String?
-  Published  Boolean?
+  Group      Json
+  Name       String
+  Published  Boolean
 }
 
 model Constellation {
@@ -1675,16 +1674,15 @@ model Constellation {
 
 model Factions {
   CorporationId        Int?
-  Corporation          Corporation? @relation(fields: [CorporationId], references: [CorporationId])
-  Description          String?
+  Description          String
   FactionId            Int          @id
-  IsUnique             Boolean?
+  IsUnique             Boolean
   MilitiaCorporationId Int?
-  Name                 String?
-  SizeFactor           Float?
+  Name                 String
+  SizeFactor           Float
   SolarSystemId        Int?
-  StationCount         Int?
-  StationSystemCount   Int?
+  StationCount         Int
+  StationSystemCount   Int
 }
 
 model Graphic {
@@ -1700,10 +1698,10 @@ model Graphic {
 
 model Group {
   GroupId    Int      @id
-  CategoryId Int?
-  Name       String?
-  Published  Boolean?
-  Types      Json?
+  CategoryId Int
+  Name       String
+  Published  Boolean
+  Types      Json
 }
 
 model Moon {
