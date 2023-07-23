@@ -152,7 +152,7 @@ export class UniverseSchedulerService {
 
     res.forEach(async (c) => {
       await this.catagoriesQueue.add(
-        'universe-catagories',
+        `catagory-${c}`,
         {
           submitTime: DateTime.now().toUTC().toISO(),
           id: c
@@ -190,7 +190,32 @@ export class UniverseSchedulerService {
 
     allGroupIds.forEach(async (c) => {
       await this.groupsQueue.add(
-        'universe-groups',
+        `group-${c}`,
+        {
+          submitTime: DateTime.now().toUTC().toISO(),
+          id: c
+        },
+        { removeOnComplete: true, removeOnFail: 10 }
+      )
+    })
+  }
+
+  @Cron('0 10 11 * * *', {
+    name: 'universe-graphics',
+    timeZone: 'UTC'
+  })
+  async scheduleGraphicsSync() {
+    this.logger.debug('creating catagories sync job')
+
+    this.logger.debug('getting catigory ids')
+
+    const client = new EVEClient()
+
+    const res = await client.universe.getUniverseGraphics({})
+
+    res.forEach(async (c) => {
+      await this.graphicsQueue.add(
+        `graphic-${c}`,
         {
           submitTime: DateTime.now().toUTC().toISO(),
           id: c

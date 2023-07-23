@@ -1,4 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
+import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Job } from 'bullmq'
+import { EVEClient } from 'libs/esi'
+import { PrismaService } from 'libs/prisma.service'
 
 @Injectable()
-export class SystemKillsService {}
+@Processor('universe-system-kills')
+export class SystemKillsService extends WorkerHost {
+  private readonly logger = new Logger('SystemKillsService')
+  @Inject(PrismaService) private prisma: PrismaService
+
+  async process(job: Job<any, any, string>): Promise<any> {
+    try {
+    } catch (e) {
+      this.logger.error(e)
+      return { error: e }
+    }
+  }
+
+  @OnWorkerEvent('completed')
+  onCompleted() {
+    this.logger.log('completed')
+  }
+  @OnWorkerEvent('failed')
+  onFailed() {
+    this.logger.log('failed')
+  }
+}
