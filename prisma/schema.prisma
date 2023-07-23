@@ -118,7 +118,6 @@ model Character {
   Alliance                     Alliance?                      @relation(fields: [AllianceId], references: [AllianceId])
   Birthday                     DateTime?                      @db.Timestamptz
   BloodlineId                  Int?
-  Bloodline                    Bloodline?                     @relation(fields: [BloodlineId], references: [BloodlineId])
   CorporationId                Int?
   Corporation                  Corporation?                   @relation(fields: [CorporationId], references: [CorporationId])
   Description                  String?
@@ -870,7 +869,6 @@ model Corporation {
   CorporationWalletDivisionTransaction CorporationWalletDivisionTransaction[]
   LoyaltyStoreOffer                    LoyaltyStoreOffer[]
   SovereigntyMap                       SovereigntyMap[]
-  Bloodline                            Bloodline[]
   Factions                             Factions[]
 }
 
@@ -1631,12 +1629,11 @@ model Status {
 }
 
 model Ancestry {
-  BloodlineId      Int?
-  Bloodline        Bloodline? @relation(fields: [BloodlineId], references: [BloodlineId])
-  Description      String?
+  BloodlineId      Int
+  Description      String
   IconId           Int?
   Id               Int        @id
-  Name             String?
+  Name             String
   ShortDescription String?
 }
 
@@ -1649,19 +1646,16 @@ model AsteroIdBelt {
 
 model Bloodline {
   BloodlineId   Int          @id
-  Charisma      Int?
-  CorporationId Int?
-  Corporation   Corporation? @relation(fields: [CorporationId], references: [CorporationId])
-  Description   String?
-  Intelligence  Int?
-  Memory        Int?
-  Name          String?
-  Perception    Int?
-  RaceId        Int?
-  ShipTypeId    Int?
-  Willpower     Int?
-  Character     Character[]
-  Ancestry      Ancestry[]
+  Charisma      Int
+  CorporationId Int
+  Description   String
+  Intelligence  Int
+  Memory        Int
+  Name          String
+  Perception    Int
+  RaceId        Int
+  ShipTypeId    Int
+  Willpower     Int
 }
 
 model Categories {
