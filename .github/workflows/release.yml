@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Token
+        id: app-token
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ secrets.TOKEN_APP_ID }}
+          private_key: ${{ secrets.TOKEN_APP_KEY }}
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: evebot-backend
+          include-v-in-tag: false
+          token: ${{steps.app-token.outputs.token}}
+          default-branch: main

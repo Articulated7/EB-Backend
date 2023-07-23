@@ -6,6 +6,10 @@
     },
     "environment": {
       "type": "string"
+    },
+    "forwardPort": {
+      "type": "integer",
+      "default": 0
     }
   },
   "required": [

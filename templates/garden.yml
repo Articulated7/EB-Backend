@@ -24,6 +24,7 @@ configs:
           servicePort: 80
           containerPort: 3000
           protocol: TCP
+          localPort: ${inputs.forwardPort}
       env:
         TZ: UTC
         ENVIRONMENT: ${inputs.environment}

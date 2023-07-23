@@ -1826,19 +1826,19 @@ model System {
 
 model Types {
   TypeId          Int      @id
-  Capacity        Float?
-  Description     String?
+  Capacity        Float
+  Description     String
   DogmaAttributes Json?
   DogmaEffects    Json?
   GraphicId       Int?
-  GroupId         Int?
+  GroupId         Int
   IconId          Int?
   MarketGroupId   Int?
   Mass            Float?
-  Name            String?
+  Name            String
   PackagedVolume  Float?
   PortionSize     Int?
-  Published       Boolean?
+  Published       Boolean
   Radius          Float?
   Volume          Float?
 }

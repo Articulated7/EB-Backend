@@ -52,11 +52,21 @@ template: service-template
 inputs:
   environment: ${environment.name}
   sentrySecretName: SCHEDULER_SENTRY_DSN
+  forwardPort: 8888
 
 ---
 
 kind: RenderTemplate
 name: status-sync
+template: service-template
+inputs:
+  environment: ${environment.name}
+  sentrySecretName: STATUS_SYNC_SENTRY_DSN
+
+---
+
+kind: RenderTemplate
+name: universe-sync
 template: service-template
 inputs:
   environment: ${environment.name}

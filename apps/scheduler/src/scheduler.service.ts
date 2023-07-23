@@ -17,12 +17,12 @@ export class SchedulerService {
     name: 'status',
     timeZone: 'UTC'
   })
-  async handleCron() {
+  async scheduleStatusSync() {
     this.logger.debug('creating status job')
     await this.statusQueue.add(
       'status',
       { submitTime: DateTime.now().toUTC().toISO() },
-      { removeOnComplete: 1, removeOnFail: 5 }
+      { removeOnComplete: true, removeOnFail: 5 }
     )
   }
 }

@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "dev": "garden dev --cmd 'deploy --logs --sync=*'",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
@@ -25,6 +26,7 @@
     "@bull-board/express": "^5.7.0",
     "@bull-board/fastify": "^5.7.0",
     "@bull-board/nestjs": "^5.7.0",
+    "@nestjs/axios": "^3.0.0",
     "@nestjs/bullmq": "^10.0.1",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",

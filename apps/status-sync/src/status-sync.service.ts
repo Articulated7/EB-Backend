@@ -1,5 +1,5 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable } from '@nestjs/common'
+import { Inject, Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
 import { PrismaService } from 'libs/prisma.service'
@@ -8,6 +8,7 @@ import { DateTime } from 'luxon'
 @Injectable()
 @Processor('status')
 export class StatusSyncConsumer extends WorkerHost {
+  private readonly logger = new Logger('StatusSyncConsumer')
   @Inject(PrismaService) private prisma: PrismaService
 
   async process(job: Job<any, any, string>) {
@@ -16,7 +17,7 @@ export class StatusSyncConsumer extends WorkerHost {
       const client = new EVEClient()
 
       if (DateTime.fromISO(job.data.submitTime) < now.minus({ seconds: 25 })) {
-        console.log('job is too old')
+        this.logger.warn('job is too old')
         return
       }
 
@@ -32,16 +33,16 @@ export class StatusSyncConsumer extends WorkerHost {
         }
       })
     } catch (e) {
-      console.log(e)
+      this.logger.error(e)
     }
   }
 
   @OnWorkerEvent('completed')
   onCompleted() {
-    console.log('completed')
+    this.logger.log('completed')
   }
   @OnWorkerEvent('failed')
   onFailed() {
-    console.log('failed')
+    this.logger.log('failed')
   }
 }
