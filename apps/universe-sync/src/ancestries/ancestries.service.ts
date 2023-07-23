@@ -11,30 +11,35 @@ export class AncestriesService extends WorkerHost {
   @Inject(PrismaService) private prisma: PrismaService
 
   async process(job: Job<any, any, string>): Promise<any> {
-    const client = new EVEClient()
+    try {
+      const client = new EVEClient()
 
-    const res = await client.universe.getUniverseAncestries({})
+      const res = await client.universe.getUniverseAncestries({})
 
-    res.forEach(async (ancestry) => {
-      await this.prisma.ancestry.upsert({
-        where: { Id: ancestry.id },
-        update: {
-          BloodlineId: ancestry.bloodline_id,
-          Description: ancestry.description,
-          Name: ancestry.name,
-          ShortDescription: ancestry.short_description,
-          IconId: ancestry.icon_id
-        },
-        create: {
-          Id: ancestry.id,
-          BloodlineId: ancestry.bloodline_id,
-          Description: ancestry.description,
-          Name: ancestry.name,
-          ShortDescription: ancestry.short_description,
-          IconId: ancestry.icon_id
-        }
+      res.forEach(async (ancestry) => {
+        await this.prisma.ancestry.upsert({
+          where: { Id: ancestry.id },
+          update: {
+            BloodlineId: ancestry.bloodline_id,
+            Description: ancestry.description,
+            Name: ancestry.name,
+            ShortDescription: ancestry.short_description,
+            IconId: ancestry.icon_id
+          },
+          create: {
+            Id: ancestry.id,
+            BloodlineId: ancestry.bloodline_id,
+            Description: ancestry.description,
+            Name: ancestry.name,
+            ShortDescription: ancestry.short_description,
+            IconId: ancestry.icon_id
+          }
+        })
       })
-    })
+    } catch (e) {
+      this.logger.error(e)
+      return { error: e }
+    }
   }
 
   @OnWorkerEvent('completed')
