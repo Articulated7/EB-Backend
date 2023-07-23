@@ -15,7 +15,7 @@ export class StatusSyncConsumer extends WorkerHost {
       const now = DateTime.now().toUTC()
       const client = new EVEClient()
 
-      if (job.data.submitTime < now.minus({ seconds: 25 })) {
+      if (DateTime.fromISO(job.data.submitTime) < now.minus({ seconds: 25 })) {
         console.log('job is too old')
         return
       }

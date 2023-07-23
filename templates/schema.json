@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "sentrySecretName": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "sentrySecretName",
+    "environment"
+  ]
+}

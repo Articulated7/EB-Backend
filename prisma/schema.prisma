@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// App Models
+// App Models | NextAuth
 model EsiToken {
   AccountId     String
   CharacterId   Int      @id
