@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class FleetsService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -33,54 +32,58 @@ export class FleetsService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The character's current fleet ID
      */
-    fleet_id: number;
+    fleet_id: number
     /**
      * Member’s role in fleet
      */
-    role: 'fleet_commander' | 'squad_commander' | 'squad_member' | 'wing_commander';
+    role:
+      | 'fleet_commander'
+      | 'squad_commander'
+      | 'squad_member'
+      | 'wing_commander'
     /**
      * ID of the squad the member is in. If not applicable, will be set to -1
      */
-    squad_id: number;
+    squad_id: number
     /**
      * ID of the wing the member is in. If not applicable, will be set to -1
      */
-    wing_id: number;
+    wing_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/fleet/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -91,9 +94,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -116,54 +119,54 @@ export class FleetsService {
     fleetId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * Is free-move enabled
      */
-    is_free_move: boolean;
+    is_free_move: boolean
     /**
      * Does the fleet have an active fleet advertisement
      */
-    is_registered: boolean;
+    is_registered: boolean
     /**
      * Is EVE Voice enabled
      */
-    is_voice_enabled: boolean;
+    is_voice_enabled: boolean
     /**
      * Fleet MOTD in CCP flavoured HTML
      */
-    motd: string;
+    motd: string
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fleets/{fleet_id}/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -174,9 +177,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -197,12 +200,12 @@ export class FleetsService {
     fleetId,
     newSettings,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * What to update for this fleet
      */
@@ -210,30 +213,30 @@ export class FleetsService {
       /**
        * Should free-move be enabled in the fleet
        */
-      is_free_move?: boolean;
+      is_free_move?: boolean
       /**
        * New fleet MOTD in CCP flavoured HTML
        */
-      motd?: string;
-    },
+      motd?: string
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/fleets/{fleet_id}/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: newSettings,
       errors: {
@@ -244,9 +247,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -271,88 +274,103 @@ export class FleetsService {
     datasource = 'tranquility',
     ifNoneMatch,
     language = 'en',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * character_id integer
-     */
-    character_id: number;
-    /**
-     * join_time string
-     */
-    join_time: string;
-    /**
-     * Member’s role in fleet
-     */
-    role: 'fleet_commander' | 'wing_commander' | 'squad_commander' | 'squad_member';
-    /**
-     * Localized role names
-     */
-    role_name: string;
-    /**
-     * ship_type_id integer
-     */
-    ship_type_id: number;
-    /**
-     * Solar system the member is located in
-     */
-    solar_system_id: number;
-    /**
-     * ID of the squad the member is in. If not applicable, will be set to -1
-     */
-    squad_id: number;
-    /**
-     * Station in which the member is docked in, if applicable
-     */
-    station_id?: number;
-    /**
-     * Whether the member take fleet warps
-     */
-    takes_fleet_warp: boolean;
-    /**
-     * ID of the wing the member is in. If not applicable, will be set to -1
-     */
-    wing_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * character_id integer
+       */
+      character_id: number
+      /**
+       * join_time string
+       */
+      join_time: string
+      /**
+       * Member’s role in fleet
+       */
+      role:
+        | 'fleet_commander'
+        | 'wing_commander'
+        | 'squad_commander'
+        | 'squad_member'
+      /**
+       * Localized role names
+       */
+      role_name: string
+      /**
+       * ship_type_id integer
+       */
+      ship_type_id: number
+      /**
+       * Solar system the member is located in
+       */
+      solar_system_id: number
+      /**
+       * ID of the squad the member is in. If not applicable, will be set to -1
+       */
+      squad_id: number
+      /**
+       * Station in which the member is docked in, if applicable
+       */
+      station_id?: number
+      /**
+       * Whether the member take fleet warps
+       */
+      takes_fleet_warp: boolean
+      /**
+       * ID of the wing the member is in. If not applicable, will be set to -1
+       */
+      wing_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fleets/{fleet_id}/members/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
-        'token': token,
+        datasource: datasource,
+        language: language,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -363,9 +381,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -386,12 +404,12 @@ export class FleetsService {
     fleetId,
     invitation,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * Details of the invitation
      */
@@ -399,38 +417,42 @@ export class FleetsService {
       /**
        * The character you want to invite
        */
-      character_id: number;
+      character_id: number
       /**
        * If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is invited with the `wing_commander` role, only `wing_id` should be specified. If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.
        */
-      role: 'fleet_commander' | 'wing_commander' | 'squad_commander' | 'squad_member';
+      role:
+        | 'fleet_commander'
+        | 'wing_commander'
+        | 'squad_commander'
+        | 'squad_member'
       /**
        * squad_id integer
        */
-      squad_id?: number;
+      squad_id?: number
       /**
        * wing_id integer
        */
-      wing_id?: number;
-    },
+      wing_id?: number
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/fleets/{fleet_id}/members/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: invitation,
       errors: {
@@ -442,9 +464,9 @@ export class FleetsService {
         422: `Errors in invitation`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -465,35 +487,35 @@ export class FleetsService {
     fleetId,
     memberId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The character ID of a member in this fleet
      */
-    memberId: number,
+    memberId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/fleets/{fleet_id}/members/{member_id}/',
       path: {
-        'fleet_id': fleetId,
-        'member_id': memberId,
+        fleet_id: fleetId,
+        member_id: memberId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -503,9 +525,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -527,16 +549,16 @@ export class FleetsService {
     memberId,
     movement,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The character ID of a member in this fleet
      */
-    memberId: number,
+    memberId: number
     /**
      * Details of the invitation
      */
@@ -544,35 +566,39 @@ export class FleetsService {
       /**
        * If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is moved to the `wing_commander` role, only `wing_id` should be specified. If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.
        */
-      role: 'fleet_commander' | 'wing_commander' | 'squad_commander' | 'squad_member';
+      role:
+        | 'fleet_commander'
+        | 'wing_commander'
+        | 'squad_commander'
+        | 'squad_member'
       /**
        * squad_id integer
        */
-      squad_id?: number;
+      squad_id?: number
       /**
        * wing_id integer
        */
-      wing_id?: number;
-    },
+      wing_id?: number
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/fleets/{fleet_id}/members/{member_id}/',
       path: {
-        'fleet_id': fleetId,
-        'member_id': memberId,
+        fleet_id: fleetId,
+        member_id: memberId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: movement,
       errors: {
@@ -584,9 +610,9 @@ export class FleetsService {
         422: `Errors in invitation`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -607,35 +633,35 @@ export class FleetsService {
     fleetId,
     squadId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The squad to delete
      */
-    squadId: number,
+    squadId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/fleets/{fleet_id}/squads/{squad_id}/',
       path: {
-        'fleet_id': fleetId,
-        'squad_id': squadId,
+        fleet_id: fleetId,
+        squad_id: squadId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -645,9 +671,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -669,12 +695,12 @@ export class FleetsService {
     naming,
     squadId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * New name of the squad
      */
@@ -682,31 +708,31 @@ export class FleetsService {
       /**
        * name string
        */
-      name: string;
-    },
+      name: string
+    }
     /**
      * The squad to rename
      */
-    squadId: number,
+    squadId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/fleets/{fleet_id}/squads/{squad_id}/',
       path: {
-        'fleet_id': fleetId,
-        'squad_id': squadId,
+        fleet_id: fleetId,
+        squad_id: squadId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: naming,
       errors: {
@@ -717,9 +743,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -744,69 +770,80 @@ export class FleetsService {
     datasource = 'tranquility',
     ifNoneMatch,
     language = 'en',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * id integer
-     */
-    id: number;
-    /**
-     * name string
-     */
-    name: string;
-    /**
-     * squads array
-     */
-    squads: Array<{
+    token?: string
+  }): CancelablePromise<
+    Array<{
       /**
        * id integer
        */
-      id: number;
+      id: number
       /**
        * name string
        */
-      name: string;
-    }>;
-  }>> {
+      name: string
+      /**
+       * squads array
+       */
+      squads: Array<{
+        /**
+         * id integer
+         */
+        id: number
+        /**
+         * name string
+         */
+        name: string
+      }>
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fleets/{fleet_id}/wings/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
-        'token': token,
+        datasource: datasource,
+        language: language,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -817,9 +854,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -839,35 +876,35 @@ export class FleetsService {
   public postFleetsFleetIdWings({
     fleetId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The wing_id of the newly created wing
      */
-    wing_id: number;
+    wing_id: number
   }> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/fleets/{fleet_id}/wings/',
       path: {
-        'fleet_id': fleetId,
+        fleet_id: fleetId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -877,9 +914,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -900,35 +937,35 @@ export class FleetsService {
     fleetId,
     wingId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The wing to delete
      */
-    wingId: number,
+    wingId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/fleets/{fleet_id}/wings/{wing_id}/',
       path: {
-        'fleet_id': fleetId,
-        'wing_id': wingId,
+        fleet_id: fleetId,
+        wing_id: wingId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -938,9 +975,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -962,12 +999,12 @@ export class FleetsService {
     naming,
     wingId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * New name of the wing
      */
@@ -975,31 +1012,31 @@ export class FleetsService {
       /**
        * name string
        */
-      name: string;
-    },
+      name: string
+    }
     /**
      * The wing to rename
      */
-    wingId: number,
+    wingId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/fleets/{fleet_id}/wings/{wing_id}/',
       path: {
-        'fleet_id': fleetId,
-        'wing_id': wingId,
+        fleet_id: fleetId,
+        wing_id: wingId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: naming,
       errors: {
@@ -1010,9 +1047,9 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1033,40 +1070,40 @@ export class FleetsService {
     fleetId,
     wingId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * ID for a fleet
      */
-    fleetId: number,
+    fleetId: number
     /**
      * The wing_id to create squad in
      */
-    wingId: number,
+    wingId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The squad_id of the newly created squad
      */
-    squad_id: number;
+    squad_id: number
   }> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/fleets/{fleet_id}/wings/{wing_id}/squads/',
       path: {
-        'fleet_id': fleetId,
-        'wing_id': wingId,
+        fleet_id: fleetId,
+        wing_id: wingId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -1076,9 +1113,8 @@ export class FleetsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

@@ -10,6 +10,5 @@ export type unauthorized = {
   /**
    * Unauthorized message
    */
-  error: string;
-};
-
+  error: string
+}

@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class IncursionsService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -27,58 +26,60 @@ export class IncursionsService {
    */
   public getIncursions({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * The constellation id in which this incursion takes place
-     */
-    constellation_id: number;
-    /**
-     * The attacking faction's id
-     */
-    faction_id: number;
-    /**
-     * Whether the final encounter has boss or not
-     */
-    has_boss: boolean;
-    /**
-     * A list of infested solar system ids that are a part of this incursion
-     */
-    infested_solar_systems: Array<number>;
-    /**
-     * Influence of this incursion as a float from 0 to 1
-     */
-    influence: number;
-    /**
-     * Staging solar system for this incursion
-     */
-    staging_solar_system_id: number;
-    /**
-     * The state of this incursion
-     */
-    state: 'withdrawing' | 'mobilizing' | 'established';
-    /**
-     * The type of this incursion
-     */
-    type: string;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The constellation id in which this incursion takes place
+       */
+      constellation_id: number
+      /**
+       * The attacking faction's id
+       */
+      faction_id: number
+      /**
+       * Whether the final encounter has boss or not
+       */
+      has_boss: boolean
+      /**
+       * A list of infested solar system ids that are a part of this incursion
+       */
+      infested_solar_systems: Array<number>
+      /**
+       * Influence of this incursion as a float from 0 to 1
+       */
+      influence: number
+      /**
+       * Staging solar system for this incursion
+       */
+      staging_solar_system_id: number
+      /**
+       * The state of this incursion
+       */
+      state: 'withdrawing' | 'mobilizing' | 'established'
+      /**
+       * The type of this incursion
+       */
+      type: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/incursions/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -86,9 +87,8 @@ export class IncursionsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

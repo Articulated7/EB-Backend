@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class MailService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -31,85 +30,91 @@ export class MailService {
     ifNoneMatch,
     labels,
     lastMailId,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Fetch only mails that match one or more of the given labels
      */
-    labels?: Array<number>,
+    labels?: Array<number>
     /**
      * List only mail with an ID lower than the given ID, if present
      */
-    lastMailId?: number,
+    lastMailId?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * From whom the mail was sent
-     */
-    from?: number;
-    /**
-     * is_read boolean
-     */
-    is_read?: boolean;
-    /**
-     * labels array
-     */
-    labels?: Array<number>;
-    /**
-     * mail_id integer
-     */
-    mail_id?: number;
-    /**
-     * Recipients of the mail
-     */
-    recipients?: Array<{
+    token?: string
+  }): CancelablePromise<
+    Array<{
       /**
-       * recipient_id integer
+       * From whom the mail was sent
        */
-      recipient_id: number;
+      from?: number
       /**
-       * recipient_type string
+       * is_read boolean
        */
-      recipient_type: 'alliance' | 'character' | 'corporation' | 'mailing_list';
-    }>;
-    /**
-     * Mail subject
-     */
-    subject?: string;
-    /**
-     * When the mail was sent
-     */
-    timestamp?: string;
-  }>> {
+      is_read?: boolean
+      /**
+       * labels array
+       */
+      labels?: Array<number>
+      /**
+       * mail_id integer
+       */
+      mail_id?: number
+      /**
+       * Recipients of the mail
+       */
+      recipients?: Array<{
+        /**
+         * recipient_id integer
+         */
+        recipient_id: number
+        /**
+         * recipient_type string
+         */
+        recipient_type:
+          | 'alliance'
+          | 'character'
+          | 'corporation'
+          | 'mailing_list'
+      }>
+      /**
+       * Mail subject
+       */
+      subject?: string
+      /**
+       * When the mail was sent
+       */
+      timestamp?: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/mail/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'labels': labels,
-        'last_mail_id': lastMailId,
-        'token': token,
+        datasource: datasource,
+        labels: labels,
+        last_mail_id: lastMailId,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -119,9 +124,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -142,12 +147,12 @@ export class MailService {
     characterId,
     mail,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The mail to send
      */
@@ -155,11 +160,11 @@ export class MailService {
       /**
        * approved_cost integer
        */
-      approved_cost?: number;
+      approved_cost?: number
       /**
        * body string
        */
-      body: string;
+      body: string
       /**
        * recipients array
        */
@@ -167,35 +172,39 @@ export class MailService {
         /**
          * recipient_id integer
          */
-        recipient_id: number;
+        recipient_id: number
         /**
          * recipient_type string
          */
-        recipient_type: 'alliance' | 'character' | 'corporation' | 'mailing_list';
-      }>;
+        recipient_type:
+          | 'alliance'
+          | 'character'
+          | 'corporation'
+          | 'mailing_list'
+      }>
       /**
        * subject string
        */
-      subject: string;
-    },
+      subject: string
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<number> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/characters/{character_id}/mail/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: mail,
       errors: {
@@ -206,9 +215,9 @@ export class MailService {
         500: `Internal server error`,
         503: `Service unavailable`,
         504: `Gateway timeout`,
-        520: `Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit`,
-      },
-    });
+        520: `Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit`
+      }
+    })
   }
 
   /**
@@ -229,24 +238,24 @@ export class MailService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * labels array
@@ -255,37 +264,55 @@ export class MailService {
       /**
        * color string
        */
-      color?: '#0000fe' | '#006634' | '#0099ff' | '#00ff33' | '#01ffff' | '#349800' | '#660066' | '#666666' | '#999999' | '#99ffff' | '#9a0000' | '#ccff9a' | '#e6e6e6' | '#fe0000' | '#ff6600' | '#ffff01' | '#ffffcd' | '#ffffff';
+      color?:
+        | '#0000fe'
+        | '#006634'
+        | '#0099ff'
+        | '#00ff33'
+        | '#01ffff'
+        | '#349800'
+        | '#660066'
+        | '#666666'
+        | '#999999'
+        | '#99ffff'
+        | '#9a0000'
+        | '#ccff9a'
+        | '#e6e6e6'
+        | '#fe0000'
+        | '#ff6600'
+        | '#ffff01'
+        | '#ffffcd'
+        | '#ffffff'
       /**
        * label_id integer
        */
-      label_id?: number;
+      label_id?: number
       /**
        * name string
        */
-      name?: string;
+      name?: string
       /**
        * unread_count integer
        */
-      unread_count?: number;
-    }>;
+      unread_count?: number
+    }>
     /**
      * total_unread_count integer
      */
-    total_unread_count?: number;
+    total_unread_count?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/mail/labels/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -295,9 +322,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -318,12 +345,12 @@ export class MailService {
     characterId,
     label,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * Label to create
      */
@@ -331,30 +358,48 @@ export class MailService {
       /**
        * Hexadecimal string representing label color, in RGB format
        */
-      color?: '#0000fe' | '#006634' | '#0099ff' | '#00ff33' | '#01ffff' | '#349800' | '#660066' | '#666666' | '#999999' | '#99ffff' | '#9a0000' | '#ccff9a' | '#e6e6e6' | '#fe0000' | '#ff6600' | '#ffff01' | '#ffffcd' | '#ffffff';
+      color?:
+        | '#0000fe'
+        | '#006634'
+        | '#0099ff'
+        | '#00ff33'
+        | '#01ffff'
+        | '#349800'
+        | '#660066'
+        | '#666666'
+        | '#999999'
+        | '#99ffff'
+        | '#9a0000'
+        | '#ccff9a'
+        | '#e6e6e6'
+        | '#fe0000'
+        | '#ff6600'
+        | '#ffff01'
+        | '#ffffcd'
+        | '#ffffff'
       /**
        * name string
        */
-      name: string;
-    },
+      name: string
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<number> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/characters/{character_id}/mail/labels/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: label,
       errors: {
@@ -364,9 +409,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -387,35 +432,35 @@ export class MailService {
     characterId,
     labelId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * An EVE label id
      */
-    labelId: number,
+    labelId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/characters/{character_id}/mail/labels/{label_id}/',
       path: {
-        'character_id': characterId,
-        'label_id': labelId,
+        character_id: characterId,
+        label_id: labelId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -425,9 +470,9 @@ export class MailService {
         422: `Default labels cannot be deleted`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -450,46 +495,48 @@ export class MailService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Mailing list ID
-     */
-    mailing_list_id: number;
-    /**
-     * name string
-     */
-    name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Mailing list ID
+       */
+      mailing_list_id: number
+      /**
+       * name string
+       */
+      name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/mail/lists/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -499,9 +546,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -522,35 +569,35 @@ export class MailService {
     characterId,
     mailId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * An EVE mail ID
      */
-    mailId: number,
+    mailId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/characters/{character_id}/mail/{mail_id}/',
       path: {
-        'character_id': characterId,
-        'mail_id': mailId,
+        character_id: characterId,
+        mail_id: mailId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -559,9 +606,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -585,45 +632,45 @@ export class MailService {
     mailId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * An EVE mail ID
      */
-    mailId: number,
+    mailId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * Mail's body
      */
-    body?: string;
+    body?: string
     /**
      * From whom the mail was sent
      */
-    from?: number;
+    from?: number
     /**
      * Labels attached to the mail
      */
-    labels?: Array<number>;
+    labels?: Array<number>
     /**
      * Whether the mail is flagged as read
      */
-    read?: boolean;
+    read?: boolean
     /**
      * Recipients of the mail
      */
@@ -631,34 +678,34 @@ export class MailService {
       /**
        * recipient_id integer
        */
-      recipient_id: number;
+      recipient_id: number
       /**
        * recipient_type string
        */
-      recipient_type: 'alliance' | 'character' | 'corporation' | 'mailing_list';
-    }>;
+      recipient_type: 'alliance' | 'character' | 'corporation' | 'mailing_list'
+    }>
     /**
      * Mail subject
      */
-    subject?: string;
+    subject?: string
     /**
      * When the mail was sent
      */
-    timestamp?: string;
+    timestamp?: string
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/mail/{mail_id}/',
       path: {
-        'character_id': characterId,
-        'mail_id': mailId,
+        character_id: characterId,
+        mail_id: mailId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -669,9 +716,9 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -693,12 +740,12 @@ export class MailService {
     contents,
     mailId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * Data used to update the mail
      */
@@ -706,35 +753,35 @@ export class MailService {
       /**
        * Labels to assign to the mail. Pre-existing labels are unassigned.
        */
-      labels?: Array<number>;
+      labels?: Array<number>
       /**
        * Whether the mail is flagged as read
        */
-      read?: boolean;
-    },
+      read?: boolean
+    }
     /**
      * An EVE mail ID
      */
-    mailId: number,
+    mailId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/characters/{character_id}/mail/{mail_id}/',
       path: {
-        'character_id': characterId,
-        'mail_id': mailId,
+        character_id: characterId,
+        mail_id: mailId
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: contents,
       errors: {
@@ -744,9 +791,8 @@ export class MailService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class ContactsService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -28,59 +27,61 @@ export class ContactsService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE alliance ID
      */
-    allianceId: number,
+    allianceId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * contact_id integer
-     */
-    contact_id: number;
-    /**
-     * contact_type string
-     */
-    contact_type: 'character' | 'corporation' | 'alliance' | 'faction';
-    /**
-     * label_ids array
-     */
-    label_ids?: Array<number>;
-    /**
-     * Standing of the contact
-     */
-    standing: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * contact_id integer
+       */
+      contact_id: number
+      /**
+       * contact_type string
+       */
+      contact_type: 'character' | 'corporation' | 'alliance' | 'faction'
+      /**
+       * label_ids array
+       */
+      label_ids?: Array<number>
+      /**
+       * Standing of the contact
+       */
+      standing: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/alliances/{alliance_id}/contacts/',
       path: {
-        'alliance_id': allianceId,
+        alliance_id: allianceId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -90,9 +91,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -115,46 +116,48 @@ export class ContactsService {
     allianceId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE alliance ID
      */
-    allianceId: number,
+    allianceId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * label_id integer
-     */
-    label_id: number;
-    /**
-     * label_name string
-     */
-    label_name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * label_id integer
+       */
+      label_id: number
+      /**
+       * label_name string
+       */
+      label_name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/alliances/{alliance_id}/contacts/labels/',
       path: {
-        'alliance_id': allianceId,
+        alliance_id: allianceId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -164,9 +167,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -185,35 +188,35 @@ export class ContactsService {
     characterId,
     contactIds,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * A list of contacts to delete
      */
-    contactIds: Array<number>,
+    contactIds: Array<number>
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/characters/{character_id}/contacts/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       query: {
-        'contact_ids': contactIds,
-        'datasource': datasource,
-        'token': token,
+        contact_ids: contactIds,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -222,9 +225,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -246,67 +249,69 @@ export class ContactsService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * contact_id integer
-     */
-    contact_id: number;
-    /**
-     * contact_type string
-     */
-    contact_type: 'character' | 'corporation' | 'alliance' | 'faction';
-    /**
-     * Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
-     */
-    is_blocked?: boolean;
-    /**
-     * Whether this contact is being watched
-     */
-    is_watched?: boolean;
-    /**
-     * label_ids array
-     */
-    label_ids?: Array<number>;
-    /**
-     * Standing of the contact
-     */
-    standing: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * contact_id integer
+       */
+      contact_id: number
+      /**
+       * contact_type string
+       */
+      contact_type: 'character' | 'corporation' | 'alliance' | 'faction'
+      /**
+       * Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
+       */
+      is_blocked?: boolean
+      /**
+       * Whether this contact is being watched
+       */
+      is_watched?: boolean
+      /**
+       * label_ids array
+       */
+      label_ids?: Array<number>
+      /**
+       * Standing of the contact
+       */
+      standing: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/contacts/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -316,9 +321,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -340,49 +345,49 @@ export class ContactsService {
     datasource = 'tranquility',
     labelIds,
     token,
-    watched = false,
+    watched = false
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * A list of contacts
      */
-    contactIds: Array<number>,
+    contactIds: Array<number>
     /**
      * Standing for the contact
      */
-    standing: number,
+    standing: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Add custom labels to the new contact
      */
-    labelIds?: Array<number>,
+    labelIds?: Array<number>
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
     /**
      * Whether the contact should be watched, note this is only effective on characters
      */
-    watched?: boolean,
+    watched?: boolean
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/characters/{character_id}/contacts/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       query: {
-        'datasource': datasource,
-        'label_ids': labelIds,
-        'standing': standing,
-        'token': token,
-        'watched': watched,
+        datasource: datasource,
+        label_ids: labelIds,
+        standing: standing,
+        token: token,
+        watched: watched
       },
       body: contactIds,
       errors: {
@@ -393,9 +398,9 @@ export class ContactsService {
         500: `Internal server error`,
         503: `Service unavailable`,
         504: `Gateway timeout`,
-        520: `Internal error thrown from the EVE server`,
-      },
-    });
+        520: `Internal error thrown from the EVE server`
+      }
+    })
   }
 
   /**
@@ -417,49 +422,49 @@ export class ContactsService {
     datasource = 'tranquility',
     labelIds,
     token,
-    watched = false,
+    watched = false
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * A list of contacts
      */
-    contactIds: Array<number>,
+    contactIds: Array<number>
     /**
      * Standing for the contact
      */
-    standing: number,
+    standing: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Add custom labels to the contact
      */
-    labelIds?: Array<number>,
+    labelIds?: Array<number>
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
     /**
      * Whether the contact should be watched, note this is only effective on characters
      */
-    watched?: boolean,
+    watched?: boolean
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'PUT',
       url: '/characters/{character_id}/contacts/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       query: {
-        'datasource': datasource,
-        'label_ids': labelIds,
-        'standing': standing,
-        'token': token,
-        'watched': watched,
+        datasource: datasource,
+        label_ids: labelIds,
+        standing: standing,
+        token: token,
+        watched: watched
       },
       body: contactIds,
       errors: {
@@ -469,9 +474,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -494,46 +499,48 @@ export class ContactsService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * label_id integer
-     */
-    label_id: number;
-    /**
-     * label_name string
-     */
-    label_name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * label_id integer
+       */
+      label_id: number
+      /**
+       * label_name string
+       */
+      label_name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/contacts/labels/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -543,9 +550,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -567,63 +574,65 @@ export class ContactsService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * contact_id integer
-     */
-    contact_id: number;
-    /**
-     * contact_type string
-     */
-    contact_type: 'character' | 'corporation' | 'alliance' | 'faction';
-    /**
-     * Whether this contact is being watched
-     */
-    is_watched?: boolean;
-    /**
-     * label_ids array
-     */
-    label_ids?: Array<number>;
-    /**
-     * Standing of the contact
-     */
-    standing: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * contact_id integer
+       */
+      contact_id: number
+      /**
+       * contact_type string
+       */
+      contact_type: 'character' | 'corporation' | 'alliance' | 'faction'
+      /**
+       * Whether this contact is being watched
+       */
+      is_watched?: boolean
+      /**
+       * label_ids array
+       */
+      label_ids?: Array<number>
+      /**
+       * Standing of the contact
+       */
+      standing: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/contacts/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -633,9 +642,9 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -658,46 +667,48 @@ export class ContactsService {
     corporationId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * label_id integer
-     */
-    label_id: number;
-    /**
-     * label_name string
-     */
-    label_name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * label_id integer
+       */
+      label_id: number
+      /**
+       * label_name string
+       */
+      label_name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/contacts/labels/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -707,9 +718,8 @@ export class ContactsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

@@ -3,7 +3,6 @@ import { SchedulerController } from './scheduler.controller'
 import { SchedulerService } from './scheduler.service'
 import { ScheduleModule } from '@nestjs/schedule'
 import { BullModule } from '@nestjs/bullmq'
-import { PrismaService } from 'libs/prisma.service'
 import { BullBoardModule } from '@bull-board/nestjs'
 import { ExpressAdapter } from '@bull-board/express'
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter'
@@ -31,9 +30,21 @@ import {
 } from 'libs/queues'
 import { UniverseSchedulerService } from './universe.service'
 import { HttpModule } from '@nestjs/axios'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { SyncStatus } from 'libs/database/entity/SyncStatus'
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DATABASE_HOST ?? 'localhost',
+      port: Number(process.env.DATABASE_PORT) ?? 5432,
+      username: process.env.DATABASE_USERNAME ?? 'postgres',
+      password: process.env.DATABASE_PASSWORD ?? 'postgres',
+      database: process.env.DATABASE_NAME ?? 'postgres',
+      entities: [SyncStatus],
+      synchronize: true
+    }),
     HttpModule.register({
       timeout: 5000
     }),
@@ -151,6 +162,6 @@ import { HttpModule } from '@nestjs/axios'
     })
   ],
   controllers: [SchedulerController],
-  providers: [SchedulerService, UniverseSchedulerService, PrismaService]
+  providers: [SchedulerService, UniverseSchedulerService]
 })
 export class SchedulerModule {}

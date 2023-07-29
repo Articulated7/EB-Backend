@@ -2,18 +2,17 @@ import { InjectQueue } from '@nestjs/bullmq'
 import { Injectable, Logger } from '@nestjs/common'
 import { Cron } from '@nestjs/schedule'
 import { Queue } from 'bullmq'
-import { PrismaService } from 'libs/prisma.service'
 import { DateTime } from 'luxon'
 import { EVEClient } from 'libs/esi/index'
 import { HttpService } from '@nestjs/axios'
-import { getHeaders } from '../../../libs/esi/core/request'
+import { getPageCount } from 'libs/helpers/axios'
 
 @Injectable()
 export class UniverseSchedulerService {
   private readonly logger = new Logger(UniverseSchedulerService.name)
+
   constructor(
     private readonly httpService: HttpService,
-    private prisma: PrismaService,
     @InjectQueue('universe-types') private typesQueue: Queue,
     @InjectQueue('universe-ancestries') private ancestriesQueue: Queue,
     @InjectQueue('universe-bloodlines') private bloodlinesQueue: Queue,
@@ -44,15 +43,14 @@ export class UniverseSchedulerService {
 
     this.logger.debug('getting types page count')
 
-    const pagesRes = await this.httpService.axiosRef.get(
+    const pages = await getPageCount(
+      this.httpService.axiosRef,
       'https://esi.evetech.net/latest/universe/types/?datasource=tranquility&language=en-us'
     )
 
-    const pages = Number(pagesRes.headers['x-pages'])
-
     for (let page = 1; page <= pages; page++) {
       await this.typesQueue.add(
-        'universe-types',
+        `universe-types-page-${page}`,
         { submitTime: DateTime.now().toUTC().toISO(), page: page },
         { removeOnComplete: true, removeOnFail: 5 }
       )
@@ -171,11 +169,10 @@ export class UniverseSchedulerService {
 
     this.logger.debug('getting groups id page count')
 
-    const pagesRes = await this.httpService.axiosRef.get(
+    const pages = await getPageCount(
+      this.httpService.axiosRef,
       'https://esi.evetech.net/latest/universe/groups/?datasource=tranquility&language=en-us'
     )
-
-    const pages = Number(pagesRes.headers['x-pages'])
 
     this.logger.debug('getting groups ids')
 

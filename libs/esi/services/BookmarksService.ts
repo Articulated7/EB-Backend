@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class BookmarksService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -28,101 +27,103 @@ export class BookmarksService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * bookmark_id integer
-     */
-    bookmark_id: number;
-    /**
-     * Optional object that is returned if a bookmark was made on a planet or a random location in space.
-     */
-    coordinates?: {
+    token?: string
+  }): CancelablePromise<
+    Array<{
       /**
-       * x number
+       * bookmark_id integer
        */
-      'x': number;
+      bookmark_id: number
       /**
-       * y number
+       * Optional object that is returned if a bookmark was made on a planet or a random location in space.
        */
-      'y': number;
+      coordinates?: {
+        /**
+         * x number
+         */
+        x: number
+        /**
+         * y number
+         */
+        y: number
+        /**
+         * z number
+         */
+        z: number
+      }
       /**
-       * z number
+       * created string
        */
-      'z': number;
-    };
-    /**
-     * created string
-     */
-    created: string;
-    /**
-     * creator_id integer
-     */
-    creator_id: number;
-    /**
-     * folder_id integer
-     */
-    folder_id?: number;
-    /**
-     * Optional object that is returned if a bookmark was made on a particular item.
-     */
-    item?: {
+      created: string
       /**
-       * item_id integer
+       * creator_id integer
        */
-      item_id: number;
+      creator_id: number
       /**
-       * type_id integer
+       * folder_id integer
        */
-      type_id: number;
-    };
-    /**
-     * label string
-     */
-    label: string;
-    /**
-     * location_id integer
-     */
-    location_id: number;
-    /**
-     * notes string
-     */
-    notes: string;
-  }>> {
+      folder_id?: number
+      /**
+       * Optional object that is returned if a bookmark was made on a particular item.
+       */
+      item?: {
+        /**
+         * item_id integer
+         */
+        item_id: number
+        /**
+         * type_id integer
+         */
+        type_id: number
+      }
+      /**
+       * label string
+       */
+      label: string
+      /**
+       * location_id integer
+       */
+      location_id: number
+      /**
+       * notes string
+       */
+      notes: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/bookmarks/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -132,9 +133,9 @@ export class BookmarksService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -156,51 +157,53 @@ export class BookmarksService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * folder_id integer
-     */
-    folder_id: number;
-    /**
-     * name string
-     */
-    name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * folder_id integer
+       */
+      folder_id: number
+      /**
+       * name string
+       */
+      name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/bookmarks/folders/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -210,9 +213,9 @@ export class BookmarksService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -236,101 +239,103 @@ export class BookmarksService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * bookmark_id integer
-     */
-    bookmark_id: number;
-    /**
-     * Optional object that is returned if a bookmark was made on a planet or a random location in space.
-     */
-    coordinates?: {
+    token?: string
+  }): CancelablePromise<
+    Array<{
       /**
-       * x number
+       * bookmark_id integer
        */
-      'x': number;
+      bookmark_id: number
       /**
-       * y number
+       * Optional object that is returned if a bookmark was made on a planet or a random location in space.
        */
-      'y': number;
+      coordinates?: {
+        /**
+         * x number
+         */
+        x: number
+        /**
+         * y number
+         */
+        y: number
+        /**
+         * z number
+         */
+        z: number
+      }
       /**
-       * z number
+       * created string
        */
-      'z': number;
-    };
-    /**
-     * created string
-     */
-    created: string;
-    /**
-     * creator_id integer
-     */
-    creator_id: number;
-    /**
-     * folder_id integer
-     */
-    folder_id?: number;
-    /**
-     * Optional object that is returned if a bookmark was made on a particular item.
-     */
-    item?: {
+      created: string
       /**
-       * item_id integer
+       * creator_id integer
        */
-      item_id: number;
+      creator_id: number
       /**
-       * type_id integer
+       * folder_id integer
        */
-      type_id: number;
-    };
-    /**
-     * label string
-     */
-    label: string;
-    /**
-     * location_id integer
-     */
-    location_id: number;
-    /**
-     * notes string
-     */
-    notes: string;
-  }>> {
+      folder_id?: number
+      /**
+       * Optional object that is returned if a bookmark was made on a particular item.
+       */
+      item?: {
+        /**
+         * item_id integer
+         */
+        item_id: number
+        /**
+         * type_id integer
+         */
+        type_id: number
+      }
+      /**
+       * label string
+       */
+      label: string
+      /**
+       * location_id integer
+       */
+      location_id: number
+      /**
+       * notes string
+       */
+      notes: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/bookmarks/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -340,9 +345,9 @@ export class BookmarksService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -366,55 +371,57 @@ export class BookmarksService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * creator_id integer
-     */
-    creator_id?: number;
-    /**
-     * folder_id integer
-     */
-    folder_id: number;
-    /**
-     * name string
-     */
-    name: string;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * creator_id integer
+       */
+      creator_id?: number
+      /**
+       * folder_id integer
+       */
+      folder_id: number
+      /**
+       * name string
+       */
+      name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/bookmarks/folders/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -424,9 +431,8 @@ export class BookmarksService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

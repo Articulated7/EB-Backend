@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class DogmaService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -27,25 +26,25 @@ export class DogmaService {
    */
   public getDogmaAttributes({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/dogma/attributes/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -53,9 +52,9 @@ export class DogmaService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -77,73 +76,73 @@ export class DogmaService {
   public getDogmaAttributesAttributeId({
     attributeId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * A dogma attribute ID
      */
-    attributeId: number,
+    attributeId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * attribute_id integer
      */
-    attribute_id: number;
+    attribute_id: number
     /**
      * default_value number
      */
-    default_value?: number;
+    default_value?: number
     /**
      * description string
      */
-    description?: string;
+    description?: string
     /**
      * display_name string
      */
-    display_name?: string;
+    display_name?: string
     /**
      * high_is_good boolean
      */
-    high_is_good?: boolean;
+    high_is_good?: boolean
     /**
      * icon_id integer
      */
-    icon_id?: number;
+    icon_id?: number
     /**
      * name string
      */
-    name?: string;
+    name?: string
     /**
      * published boolean
      */
-    published?: boolean;
+    published?: boolean
     /**
      * stackable boolean
      */
-    stackable?: boolean;
+    stackable?: boolean
     /**
      * unit_id integer
      */
-    unit_id?: number;
+    unit_id?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/dogma/attributes/{attribute_id}/',
       path: {
-        'attribute_id': attributeId,
+        attribute_id: attributeId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -152,9 +151,9 @@ export class DogmaService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -177,29 +176,29 @@ export class DogmaService {
     itemId,
     typeId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * item_id integer
      */
-    itemId: number,
+    itemId: number
     /**
      * type_id integer
      */
-    typeId: number,
+    typeId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * The ID of the character who created the item
      */
-    created_by: number;
+    created_by: number
     /**
      * dogma_attributes array
      */
@@ -207,12 +206,12 @@ export class DogmaService {
       /**
        * attribute_id integer
        */
-      attribute_id: number;
+      attribute_id: number
       /**
        * value number
        */
-      value: number;
-    }>;
+      value: number
+    }>
     /**
      * dogma_effects array
      */
@@ -220,33 +219,33 @@ export class DogmaService {
       /**
        * effect_id integer
        */
-      effect_id: number;
+      effect_id: number
       /**
        * is_default boolean
        */
-      is_default: boolean;
-    }>;
+      is_default: boolean
+    }>
     /**
      * The type ID of the mutator used to generate the dynamic item.
      */
-    mutator_type_id: number;
+    mutator_type_id: number
     /**
      * The type ID of the source item the mutator was applied to create the dynamic item.
      */
-    source_type_id: number;
+    source_type_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/dogma/dynamic/items/{type_id}/{item_id}/',
       path: {
-        'item_id': itemId,
-        'type_id': typeId,
+        item_id: itemId,
+        type_id: typeId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -255,9 +254,9 @@ export class DogmaService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -278,25 +277,25 @@ export class DogmaService {
    */
   public getDogmaEffects({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/dogma/effects/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -304,9 +303,9 @@ export class DogmaService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -326,73 +325,73 @@ export class DogmaService {
   public getDogmaEffectsEffectId({
     effectId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * A dogma effect ID
      */
-    effectId: number,
+    effectId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * description string
      */
-    description?: string;
+    description?: string
     /**
      * disallow_auto_repeat boolean
      */
-    disallow_auto_repeat?: boolean;
+    disallow_auto_repeat?: boolean
     /**
      * discharge_attribute_id integer
      */
-    discharge_attribute_id?: number;
+    discharge_attribute_id?: number
     /**
      * display_name string
      */
-    display_name?: string;
+    display_name?: string
     /**
      * duration_attribute_id integer
      */
-    duration_attribute_id?: number;
+    duration_attribute_id?: number
     /**
      * effect_category integer
      */
-    effect_category?: number;
+    effect_category?: number
     /**
      * effect_id integer
      */
-    effect_id: number;
+    effect_id: number
     /**
      * electronic_chance boolean
      */
-    electronic_chance?: boolean;
+    electronic_chance?: boolean
     /**
      * falloff_attribute_id integer
      */
-    falloff_attribute_id?: number;
+    falloff_attribute_id?: number
     /**
      * icon_id integer
      */
-    icon_id?: number;
+    icon_id?: number
     /**
      * is_assistance boolean
      */
-    is_assistance?: boolean;
+    is_assistance?: boolean
     /**
      * is_offensive boolean
      */
-    is_offensive?: boolean;
+    is_offensive?: boolean
     /**
      * is_warp_safe boolean
      */
-    is_warp_safe?: boolean;
+    is_warp_safe?: boolean
     /**
      * modifiers array
      */
@@ -400,68 +399,68 @@ export class DogmaService {
       /**
        * domain string
        */
-      domain?: string;
+      domain?: string
       /**
        * effect_id integer
        */
-      effect_id?: number;
+      effect_id?: number
       /**
        * func string
        */
-      func: string;
+      func: string
       /**
        * modified_attribute_id integer
        */
-      modified_attribute_id?: number;
+      modified_attribute_id?: number
       /**
        * modifying_attribute_id integer
        */
-      modifying_attribute_id?: number;
+      modifying_attribute_id?: number
       /**
        * operator integer
        */
-      operator?: number;
-    }>;
+      operator?: number
+    }>
     /**
      * name string
      */
-    name?: string;
+    name?: string
     /**
      * post_expression integer
      */
-    post_expression?: number;
+    post_expression?: number
     /**
      * pre_expression integer
      */
-    pre_expression?: number;
+    pre_expression?: number
     /**
      * published boolean
      */
-    published?: boolean;
+    published?: boolean
     /**
      * range_attribute_id integer
      */
-    range_attribute_id?: number;
+    range_attribute_id?: number
     /**
      * range_chance boolean
      */
-    range_chance?: boolean;
+    range_chance?: boolean
     /**
      * tracking_speed_attribute_id integer
      */
-    tracking_speed_attribute_id?: number;
+    tracking_speed_attribute_id?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/dogma/effects/{effect_id}/',
       path: {
-        'effect_id': effectId,
+        effect_id: effectId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -470,9 +469,8 @@ export class DogmaService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

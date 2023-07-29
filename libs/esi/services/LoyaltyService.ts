@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class LoyaltyService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -29,46 +28,48 @@ export class LoyaltyService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * corporation_id integer
-     */
-    corporation_id: number;
-    /**
-     * loyalty_points integer
-     */
-    loyalty_points: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * corporation_id integer
+       */
+      corporation_id: number
+      /**
+       * loyalty_points integer
+       */
+      loyalty_points: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/loyalty/points/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -78,9 +79,9 @@ export class LoyaltyService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -102,70 +103,72 @@ export class LoyaltyService {
   public getLoyaltyStoresCorporationIdOffers({
     corporationId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Analysis kredit cost
-     */
-    ak_cost?: number;
-    /**
-     * isk_cost integer
-     */
-    isk_cost: number;
-    /**
-     * lp_cost integer
-     */
-    lp_cost: number;
-    /**
-     * offer_id integer
-     */
-    offer_id: number;
-    /**
-     * quantity integer
-     */
-    quantity: number;
-    /**
-     * required_items array
-     */
-    required_items: Array<{
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Analysis kredit cost
+       */
+      ak_cost?: number
+      /**
+       * isk_cost integer
+       */
+      isk_cost: number
+      /**
+       * lp_cost integer
+       */
+      lp_cost: number
+      /**
+       * offer_id integer
+       */
+      offer_id: number
       /**
        * quantity integer
        */
-      quantity: number;
+      quantity: number
+      /**
+       * required_items array
+       */
+      required_items: Array<{
+        /**
+         * quantity integer
+         */
+        quantity: number
+        /**
+         * type_id integer
+         */
+        type_id: number
+      }>
       /**
        * type_id integer
        */
-      type_id: number;
-    }>;
-    /**
-     * type_id integer
-     */
-    type_id: number;
-  }>> {
+      type_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/loyalty/stores/{corporation_id}/offers/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -174,9 +177,8 @@ export class LoyaltyService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

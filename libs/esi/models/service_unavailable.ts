@@ -10,6 +10,5 @@ export type service_unavailable = {
   /**
    * Service unavailable message
    */
-  error: string;
-};
-
+  error: string
+}

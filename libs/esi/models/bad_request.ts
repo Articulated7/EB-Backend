@@ -10,6 +10,5 @@ export type bad_request = {
   /**
    * Bad request message
    */
-  error: string;
-};
-
+  error: string
+}

@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class StatusService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -29,42 +28,42 @@ export class StatusService {
    */
   public getStatus({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * Current online player count
      */
-    players: number;
+    players: number
     /**
      * Running version as string
      */
-    server_version: string;
+    server_version: string
     /**
      * Server start timestamp
      */
-    start_time: string;
+    start_time: string
     /**
      * If the server is in VIP mode
      */
-    vip?: boolean;
+    vip?: boolean
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/status/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -72,9 +71,8 @@ export class StatusService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

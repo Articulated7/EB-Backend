@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class IndustryService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -30,131 +29,139 @@ export class IndustryService {
     datasource = 'tranquility',
     ifNoneMatch,
     includeCompleted,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days
      */
-    includeCompleted?: boolean,
+    includeCompleted?: boolean
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Job activity ID
-     */
-    activity_id: number;
-    /**
-     * blueprint_id integer
-     */
-    blueprint_id: number;
-    /**
-     * Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
-     */
-    blueprint_location_id: number;
-    /**
-     * blueprint_type_id integer
-     */
-    blueprint_type_id: number;
-    /**
-     * ID of the character which completed this job
-     */
-    completed_character_id?: number;
-    /**
-     * Date and time when this job was completed
-     */
-    completed_date?: string;
-    /**
-     * The sume of job installation fee and industry facility tax
-     */
-    cost?: number;
-    /**
-     * Job duration in seconds
-     */
-    duration: number;
-    /**
-     * Date and time when this job finished
-     */
-    end_date: string;
-    /**
-     * ID of the facility where this job is running
-     */
-    facility_id: number;
-    /**
-     * ID of the character which installed this job
-     */
-    installer_id: number;
-    /**
-     * Unique job ID
-     */
-    job_id: number;
-    /**
-     * Number of runs blueprint is licensed for
-     */
-    licensed_runs?: number;
-    /**
-     * Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
-     */
-    output_location_id: number;
-    /**
-     * Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
-     */
-    pause_date?: string;
-    /**
-     * Chance of success for invention
-     */
-    probability?: number;
-    /**
-     * Type ID of product (manufactured, copied or invented)
-     */
-    product_type_id?: number;
-    /**
-     * Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
-     */
-    runs: number;
-    /**
-     * Date and time when this job started
-     */
-    start_date: string;
-    /**
-     * ID of the station where industry facility is located
-     */
-    station_id: number;
-    /**
-     * status string
-     */
-    status: 'active' | 'cancelled' | 'delivered' | 'paused' | 'ready' | 'reverted';
-    /**
-     * Number of successful runs for this job. Equal to runs unless this is an invention job
-     */
-    successful_runs?: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Job activity ID
+       */
+      activity_id: number
+      /**
+       * blueprint_id integer
+       */
+      blueprint_id: number
+      /**
+       * Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
+       */
+      blueprint_location_id: number
+      /**
+       * blueprint_type_id integer
+       */
+      blueprint_type_id: number
+      /**
+       * ID of the character which completed this job
+       */
+      completed_character_id?: number
+      /**
+       * Date and time when this job was completed
+       */
+      completed_date?: string
+      /**
+       * The sume of job installation fee and industry facility tax
+       */
+      cost?: number
+      /**
+       * Job duration in seconds
+       */
+      duration: number
+      /**
+       * Date and time when this job finished
+       */
+      end_date: string
+      /**
+       * ID of the facility where this job is running
+       */
+      facility_id: number
+      /**
+       * ID of the character which installed this job
+       */
+      installer_id: number
+      /**
+       * Unique job ID
+       */
+      job_id: number
+      /**
+       * Number of runs blueprint is licensed for
+       */
+      licensed_runs?: number
+      /**
+       * Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
+       */
+      output_location_id: number
+      /**
+       * Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
+       */
+      pause_date?: string
+      /**
+       * Chance of success for invention
+       */
+      probability?: number
+      /**
+       * Type ID of product (manufactured, copied or invented)
+       */
+      product_type_id?: number
+      /**
+       * Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
+       */
+      runs: number
+      /**
+       * Date and time when this job started
+       */
+      start_date: string
+      /**
+       * ID of the station where industry facility is located
+       */
+      station_id: number
+      /**
+       * status string
+       */
+      status:
+        | 'active'
+        | 'cancelled'
+        | 'delivered'
+        | 'paused'
+        | 'ready'
+        | 'reverted'
+      /**
+       * Number of successful runs for this job. Equal to runs unless this is an invention job
+       */
+      successful_runs?: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/industry/jobs/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'include_completed': includeCompleted,
-        'token': token,
+        datasource: datasource,
+        include_completed: includeCompleted,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -164,9 +171,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -191,59 +198,61 @@ export class IndustryService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * date string
-     */
-    date: string;
-    /**
-     * quantity integer
-     */
-    quantity: number;
-    /**
-     * solar_system_id integer
-     */
-    solar_system_id: number;
-    /**
-     * type_id integer
-     */
-    type_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * date string
+       */
+      date: string
+      /**
+       * quantity integer
+       */
+      quantity: number
+      /**
+       * solar_system_id integer
+       */
+      solar_system_id: number
+      /**
+       * type_id integer
+       */
+      type_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/mining/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -253,9 +262,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -284,66 +293,68 @@ export class IndustryService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * The time at which the chunk being extracted will arrive and can be fractured by the moon mining drill.
-     *
-     */
-    chunk_arrival_time: string;
-    /**
-     * The time at which the current extraction was initiated.
-     *
-     */
-    extraction_start_time: string;
-    /**
-     * moon_id integer
-     */
-    moon_id: number;
-    /**
-     * The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill.
-     *
-     */
-    natural_decay_time: string;
-    /**
-     * structure_id integer
-     */
-    structure_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The time at which the chunk being extracted will arrive and can be fractured by the moon mining drill.
+       *
+       */
+      chunk_arrival_time: string
+      /**
+       * The time at which the current extraction was initiated.
+       *
+       */
+      extraction_start_time: string
+      /**
+       * moon_id integer
+       */
+      moon_id: number
+      /**
+       * The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill.
+       *
+       */
+      natural_decay_time: string
+      /**
+       * structure_id integer
+       */
+      structure_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporation/{corporation_id}/mining/extractions/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -353,9 +364,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -384,56 +395,58 @@ export class IndustryService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * last_updated string
-     */
-    last_updated: string;
-    /**
-     * The entity that was observing the asteroid field when it was mined.
-     *
-     */
-    observer_id: number;
-    /**
-     * The category of the observing entity
-     */
-    observer_type: 'structure';
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * last_updated string
+       */
+      last_updated: string
+      /**
+       * The entity that was observing the asteroid field when it was mined.
+       *
+       */
+      observer_id: number
+      /**
+       * The category of the observing entity
+       */
+      observer_type: 'structure'
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporation/{corporation_id}/mining/observers/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -443,9 +456,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -475,70 +488,72 @@ export class IndustryService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * A mining observer id
      */
-    observerId: number,
+    observerId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * The character that did the mining
-     *
-     */
-    character_id: number;
-    /**
-     * last_updated string
-     */
-    last_updated: string;
-    /**
-     * quantity integer
-     */
-    quantity: number;
-    /**
-     * The corporation id of the character at the time data was recorded.
-     *
-     */
-    recorded_corporation_id: number;
-    /**
-     * type_id integer
-     */
-    type_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The character that did the mining
+       *
+       */
+      character_id: number
+      /**
+       * last_updated string
+       */
+      last_updated: string
+      /**
+       * quantity integer
+       */
+      quantity: number
+      /**
+       * The corporation id of the character at the time data was recorded.
+       *
+       */
+      recorded_corporation_id: number
+      /**
+       * type_id integer
+       */
+      type_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporation/{corporation_id}/mining/observers/{observer_id}/',
       path: {
-        'corporation_id': corporationId,
-        'observer_id': observerId,
+        corporation_id: corporationId,
+        observer_id: observerId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -548,9 +563,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -579,136 +594,144 @@ export class IndustryService {
     ifNoneMatch,
     includeCompleted = false,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days
      */
-    includeCompleted?: boolean,
+    includeCompleted?: boolean
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Job activity ID
-     */
-    activity_id: number;
-    /**
-     * blueprint_id integer
-     */
-    blueprint_id: number;
-    /**
-     * Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
-     */
-    blueprint_location_id: number;
-    /**
-     * blueprint_type_id integer
-     */
-    blueprint_type_id: number;
-    /**
-     * ID of the character which completed this job
-     */
-    completed_character_id?: number;
-    /**
-     * Date and time when this job was completed
-     */
-    completed_date?: string;
-    /**
-     * The sume of job installation fee and industry facility tax
-     */
-    cost?: number;
-    /**
-     * Job duration in seconds
-     */
-    duration: number;
-    /**
-     * Date and time when this job finished
-     */
-    end_date: string;
-    /**
-     * ID of the facility where this job is running
-     */
-    facility_id: number;
-    /**
-     * ID of the character which installed this job
-     */
-    installer_id: number;
-    /**
-     * Unique job ID
-     */
-    job_id: number;
-    /**
-     * Number of runs blueprint is licensed for
-     */
-    licensed_runs?: number;
-    /**
-     * ID of the location for the industry facility
-     */
-    location_id: number;
-    /**
-     * Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
-     */
-    output_location_id: number;
-    /**
-     * Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
-     */
-    pause_date?: string;
-    /**
-     * Chance of success for invention
-     */
-    probability?: number;
-    /**
-     * Type ID of product (manufactured, copied or invented)
-     */
-    product_type_id?: number;
-    /**
-     * Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
-     */
-    runs: number;
-    /**
-     * Date and time when this job started
-     */
-    start_date: string;
-    /**
-     * status string
-     */
-    status: 'active' | 'cancelled' | 'delivered' | 'paused' | 'ready' | 'reverted';
-    /**
-     * Number of successful runs for this job. Equal to runs unless this is an invention job
-     */
-    successful_runs?: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Job activity ID
+       */
+      activity_id: number
+      /**
+       * blueprint_id integer
+       */
+      blueprint_id: number
+      /**
+       * Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
+       */
+      blueprint_location_id: number
+      /**
+       * blueprint_type_id integer
+       */
+      blueprint_type_id: number
+      /**
+       * ID of the character which completed this job
+       */
+      completed_character_id?: number
+      /**
+       * Date and time when this job was completed
+       */
+      completed_date?: string
+      /**
+       * The sume of job installation fee and industry facility tax
+       */
+      cost?: number
+      /**
+       * Job duration in seconds
+       */
+      duration: number
+      /**
+       * Date and time when this job finished
+       */
+      end_date: string
+      /**
+       * ID of the facility where this job is running
+       */
+      facility_id: number
+      /**
+       * ID of the character which installed this job
+       */
+      installer_id: number
+      /**
+       * Unique job ID
+       */
+      job_id: number
+      /**
+       * Number of runs blueprint is licensed for
+       */
+      licensed_runs?: number
+      /**
+       * ID of the location for the industry facility
+       */
+      location_id: number
+      /**
+       * Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
+       */
+      output_location_id: number
+      /**
+       * Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
+       */
+      pause_date?: string
+      /**
+       * Chance of success for invention
+       */
+      probability?: number
+      /**
+       * Type ID of product (manufactured, copied or invented)
+       */
+      product_type_id?: number
+      /**
+       * Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
+       */
+      runs: number
+      /**
+       * Date and time when this job started
+       */
+      start_date: string
+      /**
+       * status string
+       */
+      status:
+        | 'active'
+        | 'cancelled'
+        | 'delivered'
+        | 'paused'
+        | 'ready'
+        | 'reverted'
+      /**
+       * Number of successful runs for this job. Equal to runs unless this is an invention job
+       */
+      successful_runs?: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/industry/jobs/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'include_completed': includeCompleted,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        include_completed: includeCompleted,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -718,9 +741,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -741,50 +764,52 @@ export class IndustryService {
    */
   public getIndustryFacilities({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * ID of the facility
-     */
-    facility_id: number;
-    /**
-     * Owner of the facility
-     */
-    owner_id: number;
-    /**
-     * Region ID where the facility is
-     */
-    region_id: number;
-    /**
-     * Solar system ID where the facility is
-     */
-    solar_system_id: number;
-    /**
-     * Tax imposed by the facility
-     */
-    tax?: number;
-    /**
-     * Type ID of the facility
-     */
-    type_id: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * ID of the facility
+       */
+      facility_id: number
+      /**
+       * Owner of the facility
+       */
+      owner_id: number
+      /**
+       * Region ID where the facility is
+       */
+      region_id: number
+      /**
+       * Solar system ID where the facility is
+       */
+      solar_system_id: number
+      /**
+       * Tax imposed by the facility
+       */
+      tax?: number
+      /**
+       * Type ID of the facility
+       */
+      type_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/industry/facilities/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -792,9 +817,9 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -815,43 +840,55 @@ export class IndustryService {
    */
   public getIndustrySystems({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * cost_indices array
-     */
-    cost_indices: Array<{
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
       /**
-       * activity string
+       * cost_indices array
        */
-      activity: 'copying' | 'duplicating' | 'invention' | 'manufacturing' | 'none' | 'reaction' | 'researching_material_efficiency' | 'researching_technology' | 'researching_time_efficiency' | 'reverse_engineering';
+      cost_indices: Array<{
+        /**
+         * activity string
+         */
+        activity:
+          | 'copying'
+          | 'duplicating'
+          | 'invention'
+          | 'manufacturing'
+          | 'none'
+          | 'reaction'
+          | 'researching_material_efficiency'
+          | 'researching_technology'
+          | 'researching_time_efficiency'
+          | 'reverse_engineering'
+        /**
+         * cost_index number
+         */
+        cost_index: number
+      }>
       /**
-       * cost_index number
+       * solar_system_id integer
        */
-      cost_index: number;
-    }>;
-    /**
-     * solar_system_id integer
-     */
-    solar_system_id: number;
-  }>> {
+      solar_system_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/industry/systems/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -859,9 +896,8 @@ export class IndustryService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

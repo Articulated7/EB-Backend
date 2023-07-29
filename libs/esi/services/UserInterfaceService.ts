@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class UserInterfaceService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -28,38 +27,38 @@ export class UserInterfaceService {
     addToBeginning = false,
     clearOtherWaypoints = false,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * The destination to travel to, can be solar system, station or structure's id
      */
-    destinationId: number,
+    destinationId: number
     /**
      * Whether this solar system should be added to the beginning of all waypoints
      */
-    addToBeginning?: boolean,
+    addToBeginning?: boolean
     /**
      * Whether clean other waypoints beforing adding this one
      */
-    clearOtherWaypoints?: boolean,
+    clearOtherWaypoints?: boolean
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/ui/autopilot/waypoint/',
       query: {
-        'add_to_beginning': addToBeginning,
-        'clear_other_waypoints': clearOtherWaypoints,
-        'datasource': datasource,
-        'destination_id': destinationId,
-        'token': token,
+        add_to_beginning: addToBeginning,
+        clear_other_waypoints: clearOtherWaypoints,
+        datasource: datasource,
+        destination_id: destinationId,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -68,9 +67,9 @@ export class UserInterfaceService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -90,28 +89,28 @@ export class UserInterfaceService {
   public postUiOpenwindowContract({
     contractId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * The contract to open
      */
-    contractId: number,
+    contractId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/ui/openwindow/contract/',
       query: {
-        'contract_id': contractId,
-        'datasource': datasource,
-        'token': token,
+        contract_id: contractId,
+        datasource: datasource,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -120,9 +119,9 @@ export class UserInterfaceService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -142,28 +141,28 @@ export class UserInterfaceService {
   public postUiOpenwindowInformation({
     targetId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * The target to open
      */
-    targetId: number,
+    targetId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/ui/openwindow/information/',
       query: {
-        'datasource': datasource,
-        'target_id': targetId,
-        'token': token,
+        datasource: datasource,
+        target_id: targetId,
+        token: token
       },
       errors: {
         400: `Bad request`,
@@ -172,9 +171,9 @@ export class UserInterfaceService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -194,28 +193,28 @@ export class UserInterfaceService {
   public postUiOpenwindowMarketdetails({
     typeId,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * The item type to open in market window
      */
-    typeId: number,
+    typeId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/ui/openwindow/marketdetails/',
       query: {
-        'datasource': datasource,
-        'token': token,
-        'type_id': typeId,
+        datasource: datasource,
+        token: token,
+        type_id: typeId
       },
       errors: {
         400: `Bad request`,
@@ -224,9 +223,9 @@ export class UserInterfaceService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -246,7 +245,7 @@ export class UserInterfaceService {
   public postUiOpenwindowNewmail({
     newMail,
     datasource = 'tranquility',
-    token,
+    token
   }: {
     /**
      * The details of mail to create
@@ -255,39 +254,39 @@ export class UserInterfaceService {
       /**
        * body string
        */
-      body: string;
+      body: string
       /**
        * recipients array
        */
-      recipients: Array<number>;
+      recipients: Array<number>
       /**
        * subject string
        */
-      subject: string;
+      subject: string
       /**
        * to_corp_or_alliance_id integer
        */
-      to_corp_or_alliance_id?: number;
+      to_corp_or_alliance_id?: number
       /**
        * Corporations, alliances and mailing lists are all types of mailing groups. You may only send to one mailing group, at a time, so you may fill out either this field or the to_corp_or_alliance_ids field
        */
-      to_mailing_list_id?: number;
-    },
+      to_mailing_list_id?: number
+    }
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/ui/openwindow/newmail/',
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       body: newMail,
       errors: {
@@ -298,9 +297,8 @@ export class UserInterfaceService {
         422: `Invalid request`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

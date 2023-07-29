@@ -10,10 +10,9 @@ export type forbidden = {
   /**
    * Forbidden message
    */
-  error: string;
+  error: string
   /**
    * status code received from SSO
    */
-  sso_status?: number;
-};
-
+  sso_status?: number
+}

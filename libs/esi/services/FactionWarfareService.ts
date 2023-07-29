@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class FactionWarfareService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -31,41 +30,41 @@ export class FactionWarfareService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The given character's current faction rank
      */
-    current_rank?: number;
+    current_rank?: number
     /**
      * The enlistment date of the given character into faction warfare. Will not be included if character is not enlisted in faction warfare
      */
-    enlisted_on?: string;
+    enlisted_on?: string
     /**
      * The faction the given character is enlisted to fight for. Will not be included if character is not enlisted in faction warfare
      */
-    faction_id?: number;
+    faction_id?: number
     /**
      * The given character's highest faction rank achieved
      */
-    highest_rank?: number;
+    highest_rank?: number
     /**
      * Summary of kills done by the given character against enemy factions
      */
@@ -73,16 +72,16 @@ export class FactionWarfareService {
       /**
        * Last week's total number of kills by a given character against enemy factions
        */
-      last_week: number;
+      last_week: number
       /**
        * Total number of kills by a given character against enemy factions since the character enlisted
        */
-      total: number;
+      total: number
       /**
        * Yesterday's total number of kills by a given character against enemy factions
        */
-      yesterday: number;
-    };
+      yesterday: number
+    }
     /**
      * Summary of victory points gained by the given character for the enlisted faction
      */
@@ -90,29 +89,29 @@ export class FactionWarfareService {
       /**
        * Last week's victory points gained by the given character
        */
-      last_week: number;
+      last_week: number
       /**
        * Total victory points gained since the given character enlisted
        */
-      total: number;
+      total: number
       /**
        * Yesterday's victory points gained by the given character
        */
-      yesterday: number;
-    };
+      yesterday: number
+    }
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/fw/stats/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -122,9 +121,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -149,33 +148,33 @@ export class FactionWarfareService {
     corporationId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare
      */
-    enlisted_on?: string;
+    enlisted_on?: string
     /**
      * The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare
      */
-    faction_id?: number;
+    faction_id?: number
     /**
      * Summary of kills done by the given corporation against enemy factions
      */
@@ -183,20 +182,20 @@ export class FactionWarfareService {
       /**
        * Last week's total number of kills by members of the given corporation against enemy factions
        */
-      last_week: number;
+      last_week: number
       /**
        * Total number of kills by members of the given corporation against enemy factions since the corporation enlisted
        */
-      total: number;
+      total: number
       /**
        * Yesterday's total number of kills by members of the given corporation against enemy factions
        */
-      yesterday: number;
-    };
+      yesterday: number
+    }
     /**
      * How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare
      */
-    pilots?: number;
+    pilots?: number
     /**
      * Summary of victory points gained by the given corporation for the enlisted faction
      */
@@ -204,29 +203,29 @@ export class FactionWarfareService {
       /**
        * Last week's victory points gained by members of the given corporation
        */
-      last_week: number;
+      last_week: number
       /**
        * Total victory points gained since the given corporation enlisted
        */
-      total: number;
+      total: number
       /**
        * Yesterday's victory points gained by members of the given corporation
        */
-      yesterday: number;
-    };
+      yesterday: number
+    }
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/fw/stats/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -236,9 +235,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -261,16 +260,16 @@ export class FactionWarfareService {
    */
   public getFwLeaderboards({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * Top 4 rankings of factions by number of kills from yesterday, last week and in total
@@ -283,12 +282,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
+        faction_id?: number
+      }>
       /**
        * Top 4 ranking of factions by kills in the past week
        */
@@ -296,12 +295,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
+        faction_id?: number
+      }>
       /**
        * Top 4 ranking of factions by kills in the past day
        */
@@ -309,13 +308,13 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
-    };
+        faction_id?: number
+      }>
+    }
     /**
      * Top 4 rankings of factions by victory points from yesterday, last week and in total
      */
@@ -327,12 +326,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
+        faction_id?: number
+      }>
       /**
        * Top 4 ranking of factions by victory points in the past week
        */
@@ -340,12 +339,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
+        faction_id?: number
+      }>
       /**
        * Top 4 ranking of factions by victory points in the past day
        */
@@ -353,22 +352,22 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * faction_id integer
          */
-        faction_id?: number;
-      }>;
-    };
+        faction_id?: number
+      }>
+    }
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/leaderboards/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -376,9 +375,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -401,16 +400,16 @@ export class FactionWarfareService {
    */
   public getFwLeaderboardsCharacters({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * Top 100 rankings of pilots by number of kills from yesterday, last week and in total
@@ -423,12 +422,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
+        character_id?: number
+      }>
       /**
        * Top 100 ranking of pilots by kills in the past week
        */
@@ -436,12 +435,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
+        character_id?: number
+      }>
       /**
        * Top 100 ranking of pilots by kills in the past day
        */
@@ -449,13 +448,13 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
-    };
+        character_id?: number
+      }>
+    }
     /**
      * Top 100 rankings of pilots by victory points from yesterday, last week and in total
      */
@@ -467,12 +466,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
+        character_id?: number
+      }>
       /**
        * Top 100 ranking of pilots by victory points in the past week
        */
@@ -480,12 +479,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
+        character_id?: number
+      }>
       /**
        * Top 100 ranking of pilots by victory points in the past day
        */
@@ -493,22 +492,22 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * character_id integer
          */
-        character_id?: number;
-      }>;
-    };
+        character_id?: number
+      }>
+    }
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/leaderboards/characters/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -516,9 +515,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -541,16 +540,16 @@ export class FactionWarfareService {
    */
   public getFwLeaderboardsCorporations({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * Top 10 rankings of corporations by number of kills from yesterday, last week and in total
@@ -563,12 +562,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
+        corporation_id?: number
+      }>
       /**
        * Top 10 ranking of corporations by kills in the past week
        */
@@ -576,12 +575,12 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
+        corporation_id?: number
+      }>
       /**
        * Top 10 ranking of corporations by kills in the past day
        */
@@ -589,13 +588,13 @@ export class FactionWarfareService {
         /**
          * Amount of kills
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
-    };
+        corporation_id?: number
+      }>
+    }
     /**
      * Top 10 rankings of corporations by victory points from yesterday, last week and in total
      */
@@ -607,12 +606,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
+        corporation_id?: number
+      }>
       /**
        * Top 10 ranking of corporations by victory points in the past week
        */
@@ -620,12 +619,12 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
+        corporation_id?: number
+      }>
       /**
        * Top 10 ranking of corporations by victory points in the past day
        */
@@ -633,22 +632,22 @@ export class FactionWarfareService {
         /**
          * Amount of victory points
          */
-        amount?: number;
+        amount?: number
         /**
          * corporation_id integer
          */
-        corporation_id?: number;
-      }>;
-    };
+        corporation_id?: number
+      }>
+    }
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/leaderboards/corporations/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -656,9 +655,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -681,72 +680,74 @@ export class FactionWarfareService {
    */
   public getFwStats({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * faction_id integer
-     */
-    faction_id: number;
-    /**
-     * Summary of kills against an enemy faction for the given faction
-     */
-    kills: {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
       /**
-       * Last week's total number of kills against enemy factions
+       * faction_id integer
        */
-      last_week: number;
+      faction_id: number
       /**
-       * Total number of kills against enemy factions since faction warfare began
+       * Summary of kills against an enemy faction for the given faction
        */
-      total: number;
+      kills: {
+        /**
+         * Last week's total number of kills against enemy factions
+         */
+        last_week: number
+        /**
+         * Total number of kills against enemy factions since faction warfare began
+         */
+        total: number
+        /**
+         * Yesterday's total number of kills against enemy factions
+         */
+        yesterday: number
+      }
       /**
-       * Yesterday's total number of kills against enemy factions
+       * How many pilots fight for the given faction
        */
-      yesterday: number;
-    };
-    /**
-     * How many pilots fight for the given faction
-     */
-    pilots: number;
-    /**
-     * The number of solar systems controlled by the given faction
-     */
-    systems_controlled: number;
-    /**
-     * Summary of victory points gained for the given faction
-     */
-    victory_points: {
+      pilots: number
       /**
-       * Last week's victory points gained
+       * The number of solar systems controlled by the given faction
        */
-      last_week: number;
+      systems_controlled: number
       /**
-       * Total victory points gained since faction warfare began
+       * Summary of victory points gained for the given faction
        */
-      total: number;
-      /**
-       * Yesterday's victory points gained
-       */
-      yesterday: number;
-    };
-  }>> {
+      victory_points: {
+        /**
+         * Last week's victory points gained
+         */
+        last_week: number
+        /**
+         * Total victory points gained since faction warfare began
+         */
+        total: number
+        /**
+         * Yesterday's victory points gained
+         */
+        yesterday: number
+      }
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/stats/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -754,9 +755,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -779,50 +780,52 @@ export class FactionWarfareService {
    */
   public getFwSystems({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * contested string
-     */
-    contested: 'captured' | 'contested' | 'uncontested' | 'vulnerable';
-    /**
-     * occupier_faction_id integer
-     */
-    occupier_faction_id: number;
-    /**
-     * owner_faction_id integer
-     */
-    owner_faction_id: number;
-    /**
-     * solar_system_id integer
-     */
-    solar_system_id: number;
-    /**
-     * victory_points integer
-     */
-    victory_points: number;
-    /**
-     * victory_points_threshold integer
-     */
-    victory_points_threshold: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * contested string
+       */
+      contested: 'captured' | 'contested' | 'uncontested' | 'vulnerable'
+      /**
+       * occupier_faction_id integer
+       */
+      occupier_faction_id: number
+      /**
+       * owner_faction_id integer
+       */
+      owner_faction_id: number
+      /**
+       * solar_system_id integer
+       */
+      solar_system_id: number
+      /**
+       * victory_points integer
+       */
+      victory_points: number
+      /**
+       * victory_points_threshold integer
+       */
+      victory_points_threshold: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/systems/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -830,9 +833,9 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -855,34 +858,36 @@ export class FactionWarfareService {
    */
   public getFwWars({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * The faction ID of the enemy faction.
-     */
-    against_id: number;
-    /**
-     * faction_id integer
-     */
-    faction_id: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The faction ID of the enemy faction.
+       */
+      against_id: number
+      /**
+       * faction_id integer
+       */
+      faction_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/fw/wars/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -890,9 +895,8 @@ export class FactionWarfareService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

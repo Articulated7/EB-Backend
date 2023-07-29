@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class KillmailsService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -30,51 +29,53 @@ export class KillmailsService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * A hash of this killmail
-     */
-    killmail_hash: string;
-    /**
-     * ID of this killmail
-     */
-    killmail_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * A hash of this killmail
+       */
+      killmail_hash: string
+      /**
+       * ID of this killmail
+       */
+      killmail_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/killmails/recent/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -84,9 +85,9 @@ export class KillmailsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -114,51 +115,53 @@ export class KillmailsService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * A hash of this killmail
-     */
-    killmail_hash: string;
-    /**
-     * ID of this killmail
-     */
-    killmail_id: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * A hash of this killmail
+       */
+      killmail_hash: string
+      /**
+       * ID of this killmail
+       */
+      killmail_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/killmails/recent/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -168,9 +171,9 @@ export class KillmailsService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -193,24 +196,24 @@ export class KillmailsService {
     killmailHash,
     killmailId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The killmail hash for verification
      */
-    killmailHash: string,
+    killmailHash: string
     /**
      * The killmail ID to be queried
      */
-    killmailId: number,
+    killmailId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * attackers array
@@ -219,62 +222,62 @@ export class KillmailsService {
       /**
        * alliance_id integer
        */
-      alliance_id?: number;
+      alliance_id?: number
       /**
        * character_id integer
        */
-      character_id?: number;
+      character_id?: number
       /**
        * corporation_id integer
        */
-      corporation_id?: number;
+      corporation_id?: number
       /**
        * damage_done integer
        */
-      damage_done: number;
+      damage_done: number
       /**
        * faction_id integer
        */
-      faction_id?: number;
+      faction_id?: number
       /**
        * Was the attacker the one to achieve the final blow
        *
        */
-      final_blow: boolean;
+      final_blow: boolean
       /**
        * Security status for the attacker
        *
        */
-      security_status: number;
+      security_status: number
       /**
        * What ship was the attacker flying
        *
        */
-      ship_type_id?: number;
+      ship_type_id?: number
       /**
        * What weapon was used by the attacker for the kill
        *
        */
-      weapon_type_id?: number;
-    }>;
+      weapon_type_id?: number
+    }>
     /**
      * ID of the killmail
      */
-    killmail_id: number;
+    killmail_id: number
     /**
      * Time that the victim was killed and the killmail generated
      *
      */
-    killmail_time: string;
+    killmail_time: string
     /**
      * Moon if the kill took place at one
      */
-    moon_id?: number;
+    moon_id?: number
     /**
      * Solar system that the kill took place in
      *
      */
-    solar_system_id: number;
+    solar_system_id: number
     /**
      * victim object
      */
@@ -282,24 +285,24 @@ export class KillmailsService {
       /**
        * alliance_id integer
        */
-      alliance_id?: number;
+      alliance_id?: number
       /**
        * character_id integer
        */
-      character_id?: number;
+      character_id?: number
       /**
        * corporation_id integer
        */
-      corporation_id?: number;
+      corporation_id?: number
       /**
        * How much total damage was taken by the victim
        *
        */
-      damage_taken: number;
+      damage_taken: number
       /**
        * faction_id integer
        */
-      faction_id?: number;
+      faction_id?: number
       /**
        * items array
        */
@@ -308,11 +311,11 @@ export class KillmailsService {
          * Flag for the location of the item
          *
          */
-        flag: number;
+        flag: number
         /**
          * item_type_id integer
          */
-        item_type_id: number;
+        item_type_id: number
         /**
          * items array
          */
@@ -320,39 +323,39 @@ export class KillmailsService {
           /**
            * flag integer
            */
-          flag: number;
+          flag: number
           /**
            * item_type_id integer
            */
-          item_type_id: number;
+          item_type_id: number
           /**
            * quantity_destroyed integer
            */
-          quantity_destroyed?: number;
+          quantity_destroyed?: number
           /**
            * quantity_dropped integer
            */
-          quantity_dropped?: number;
+          quantity_dropped?: number
           /**
            * singleton integer
            */
-          singleton: number;
-        }>;
+          singleton: number
+        }>
         /**
          * How many of the item were destroyed if any
          *
          */
-        quantity_destroyed?: number;
+        quantity_destroyed?: number
         /**
          * How many of the item were dropped if any
          *
          */
-        quantity_dropped?: number;
+        quantity_dropped?: number
         /**
          * singleton integer
          */
-        singleton: number;
-      }>;
+        singleton: number
+      }>
       /**
        * Coordinates of the victim in Cartesian space relative to the Sun
        *
@@ -361,40 +364,40 @@ export class KillmailsService {
         /**
          * x number
          */
-        'x': number;
+        x: number
         /**
          * y number
          */
-        'y': number;
+        y: number
         /**
          * z number
          */
-        'z': number;
-      };
+        z: number
+      }
       /**
        * The ship that the victim was piloting and was destroyed
        *
        */
-      ship_type_id: number;
-    };
+      ship_type_id: number
+    }
     /**
      * War if the killmail is generated in relation to an official war
      *
      */
-    war_id?: number;
+    war_id?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/killmails/{killmail_id}/{killmail_hash}/',
       path: {
-        'killmail_hash': killmailHash,
-        'killmail_id': killmailId,
+        killmail_hash: killmailHash,
+        killmail_id: killmailId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -403,9 +406,8 @@ export class KillmailsService {
         422: `Invalid killmail_id and/or killmail_hash`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

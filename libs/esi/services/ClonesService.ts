@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class ClonesService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -29,24 +28,24 @@ export class ClonesService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * home_location object
@@ -55,12 +54,12 @@ export class ClonesService {
       /**
        * location_id integer
        */
-      location_id?: number;
+      location_id?: number
       /**
        * location_type string
        */
-      location_type?: 'station' | 'structure';
-    };
+      location_type?: 'station' | 'structure'
+    }
     /**
      * jump_clones array
      */
@@ -68,45 +67,45 @@ export class ClonesService {
       /**
        * implants array
        */
-      implants: Array<number>;
+      implants: Array<number>
       /**
        * jump_clone_id integer
        */
-      jump_clone_id: number;
+      jump_clone_id: number
       /**
        * location_id integer
        */
-      location_id: number;
+      location_id: number
       /**
        * location_type string
        */
-      location_type: 'station' | 'structure';
+      location_type: 'station' | 'structure'
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * last_clone_jump_date string
      */
-    last_clone_jump_date?: string;
+    last_clone_jump_date?: string
     /**
      * last_station_change_date string
      */
-    last_station_change_date?: string;
+    last_station_change_date?: string
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/clones/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -116,9 +115,9 @@ export class ClonesService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -143,37 +142,37 @@ export class ClonesService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/implants/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -183,9 +182,8 @@ export class ClonesService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

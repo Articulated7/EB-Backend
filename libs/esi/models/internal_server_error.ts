@@ -10,6 +10,5 @@ export type internal_server_error = {
   /**
    * Internal server error message
    */
-  error: string;
-};
-
+  error: string
+}

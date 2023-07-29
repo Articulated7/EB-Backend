@@ -10,6 +10,5 @@ export type error_limited = {
   /**
    * Error limited message
    */
-  error: string;
-};
-
+  error: string
+}

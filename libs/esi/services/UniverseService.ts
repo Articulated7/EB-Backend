@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class UniverseService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -27,60 +26,71 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
-  }): CancelablePromise<Array<{
-    /**
-     * The bloodline associated with this ancestry
-     */
-    bloodline_id: number;
-    /**
-     * description string
-     */
-    description: string;
-    /**
-     * icon_id integer
-     */
-    icon_id?: number;
-    /**
-     * id integer
-     */
-    id: number;
-    /**
-     * name string
-     */
-    name: string;
-    /**
-     * short_description string
-     */
-    short_description?: string;
-  }>> {
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The bloodline associated with this ancestry
+       */
+      bloodline_id: number
+      /**
+       * description string
+       */
+      description: string
+      /**
+       * icon_id integer
+       */
+      icon_id?: number
+      /**
+       * id integer
+       */
+      id: number
+      /**
+       * name string
+       */
+      name: string
+      /**
+       * short_description string
+       */
+      short_description?: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/ancestries/',
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -88,9 +98,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -110,25 +120,25 @@ export class UniverseService {
   public getUniverseAsteroidBeltsAsteroidBeltId({
     asteroidBeltId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * asteroid_belt_id integer
      */
-    asteroidBeltId: number,
+    asteroidBeltId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * position object
      */
@@ -136,32 +146,32 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * The solar system this asteroid belt is in
      */
-    system_id: number;
+    system_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/asteroid_belts/{asteroid_belt_id}/',
       path: {
-        'asteroid_belt_id': asteroidBeltId,
+        asteroid_belt_id: asteroidBeltId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -170,9 +180,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -193,80 +203,91 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
-  }): CancelablePromise<Array<{
-    /**
-     * bloodline_id integer
-     */
-    bloodline_id: number;
-    /**
-     * charisma integer
-     */
-    charisma: number;
-    /**
-     * corporation_id integer
-     */
-    corporation_id: number;
-    /**
-     * description string
-     */
-    description: string;
-    /**
-     * intelligence integer
-     */
-    intelligence: number;
-    /**
-     * memory integer
-     */
-    memory: number;
-    /**
-     * name string
-     */
-    name: string;
-    /**
-     * perception integer
-     */
-    perception: number;
-    /**
-     * race_id integer
-     */
-    race_id: number;
-    /**
-     * ship_type_id integer
-     */
-    ship_type_id: number | null;
-    /**
-     * willpower integer
-     */
-    willpower: number;
-  }>> {
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
+  }): CancelablePromise<
+    Array<{
+      /**
+       * bloodline_id integer
+       */
+      bloodline_id: number
+      /**
+       * charisma integer
+       */
+      charisma: number
+      /**
+       * corporation_id integer
+       */
+      corporation_id: number
+      /**
+       * description string
+       */
+      description: string
+      /**
+       * intelligence integer
+       */
+      intelligence: number
+      /**
+       * memory integer
+       */
+      memory: number
+      /**
+       * name string
+       */
+      name: string
+      /**
+       * perception integer
+       */
+      perception: number
+      /**
+       * race_id integer
+       */
+      race_id: number
+      /**
+       * ship_type_id integer
+       */
+      ship_type_id: number | null
+      /**
+       * willpower integer
+       */
+      willpower: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/bloodlines/',
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -274,9 +295,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -295,25 +316,25 @@ export class UniverseService {
    */
   public getUniverseCategories({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/categories/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -321,9 +342,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -345,59 +366,68 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * An Eve item category ID
      */
-    categoryId: number,
+    categoryId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * category_id integer
      */
-    category_id: number;
+    category_id: number
     /**
      * groups array
      */
-    groups: Array<number>;
+    groups: Array<number>
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * published boolean
      */
-    published: boolean;
+    published: boolean
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/categories/{category_id}/',
       path: {
-        'category_id': categoryId,
+        category_id: categoryId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -406,9 +436,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -427,25 +457,25 @@ export class UniverseService {
    */
   public getUniverseConstellations({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/constellations/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -453,9 +483,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -477,37 +507,46 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * constellation_id integer
      */
-    constellationId: number,
+    constellationId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * constellation_id integer
      */
-    constellation_id: number;
+    constellation_id: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * position object
      */
@@ -515,38 +554,38 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * The region this constellation is in
      */
-    region_id: number;
+    region_id: number
     /**
      * systems array
      */
-    systems: Array<number>;
+    systems: Array<number>
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/constellations/{constellation_id}/',
       path: {
-        'constellation_id': constellationId,
+        constellation_id: constellationId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -555,9 +594,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -578,76 +617,87 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
-  }): CancelablePromise<Array<{
-    /**
-     * corporation_id integer
-     */
-    corporation_id?: number;
-    /**
-     * description string
-     */
-    description: string;
-    /**
-     * faction_id integer
-     */
-    faction_id: number;
-    /**
-     * is_unique boolean
-     */
-    is_unique: boolean;
-    /**
-     * militia_corporation_id integer
-     */
-    militia_corporation_id?: number;
-    /**
-     * name string
-     */
-    name: string;
-    /**
-     * size_factor number
-     */
-    size_factor: number;
-    /**
-     * solar_system_id integer
-     */
-    solar_system_id?: number;
-    /**
-     * station_count integer
-     */
-    station_count: number;
-    /**
-     * station_system_count integer
-     */
-    station_system_count: number;
-  }>> {
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
+  }): CancelablePromise<
+    Array<{
+      /**
+       * corporation_id integer
+       */
+      corporation_id?: number
+      /**
+       * description string
+       */
+      description: string
+      /**
+       * faction_id integer
+       */
+      faction_id: number
+      /**
+       * is_unique boolean
+       */
+      is_unique: boolean
+      /**
+       * militia_corporation_id integer
+       */
+      militia_corporation_id?: number
+      /**
+       * name string
+       */
+      name: string
+      /**
+       * size_factor number
+       */
+      size_factor: number
+      /**
+       * solar_system_id integer
+       */
+      solar_system_id?: number
+      /**
+       * station_count integer
+       */
+      station_count: number
+      /**
+       * station_system_count integer
+       */
+      station_system_count: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/factions/',
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -655,9 +705,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -676,25 +726,25 @@ export class UniverseService {
    */
   public getUniverseGraphics({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/graphics/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -702,9 +752,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -726,65 +776,65 @@ export class UniverseService {
   public getUniverseGraphicsGraphicId({
     graphicId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * graphic_id integer
      */
-    graphicId: number,
+    graphicId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * collision_file string
      */
-    collision_file?: string;
+    collision_file?: string
     /**
      * graphic_file string
      */
-    graphic_file?: string;
+    graphic_file?: string
     /**
      * graphic_id integer
      */
-    graphic_id: number;
+    graphic_id: number
     /**
      * icon_folder string
      */
-    icon_folder?: string;
+    icon_folder?: string
     /**
      * sof_dna string
      */
-    sof_dna?: string;
+    sof_dna?: string
     /**
      * sof_fation_name string
      */
-    sof_fation_name?: string;
+    sof_fation_name?: string
     /**
      * sof_hull_name string
      */
-    sof_hull_name?: string;
+    sof_hull_name?: string
     /**
      * sof_race_name string
      */
-    sof_race_name?: string;
+    sof_race_name?: string
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/graphics/{graphic_id}/',
       path: {
-        'graphic_id': graphicId,
+        graphic_id: graphicId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -793,9 +843,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -815,30 +865,30 @@ export class UniverseService {
   public getUniverseGroups({
     datasource = 'tranquility',
     ifNoneMatch,
-    page = 1,
+    page = 1
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/groups/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
+        datasource: datasource,
+        page: page
       },
       errors: {
         304: `Not modified`,
@@ -846,9 +896,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -872,63 +922,72 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * An Eve item group ID
      */
-    groupId: number,
+    groupId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * category_id integer
      */
-    category_id: number;
+    category_id: number
     /**
      * group_id integer
      */
-    group_id: number;
+    group_id: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * published boolean
      */
-    published: boolean;
+    published: boolean
     /**
      * types array
      */
-    types: Array<number>;
+    types: Array<number>
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/groups/{group_id}/',
       path: {
-        'group_id': groupId,
+        group_id: groupId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -937,9 +996,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -960,24 +1019,33 @@ export class UniverseService {
     names,
     acceptLanguage = 'en',
     datasource = 'tranquility',
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * The names to resolve
      */
-    names: Array<string>,
+    names: Array<string>
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * agents array
@@ -986,12 +1054,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * alliances array
      */
@@ -999,12 +1067,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * characters array
      */
@@ -1012,12 +1080,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * constellations array
      */
@@ -1025,12 +1093,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * corporations array
      */
@@ -1038,12 +1106,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * factions array
      */
@@ -1051,12 +1119,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * inventory_types array
      */
@@ -1064,12 +1132,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * regions array
      */
@@ -1077,12 +1145,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * stations array
      */
@@ -1090,12 +1158,12 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
     /**
      * systems array
      */
@@ -1103,22 +1171,22 @@ export class UniverseService {
       /**
        * id integer
        */
-      id?: number;
+      id?: number
       /**
        * name string
        */
-      name?: string;
-    }>;
+      name?: string
+    }>
   }> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/universe/ids/',
       headers: {
-        'Accept-Language': acceptLanguage,
+        'Accept-Language': acceptLanguage
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       body: names,
       errors: {
@@ -1126,9 +1194,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1148,29 +1216,29 @@ export class UniverseService {
   public getUniverseMoonsMoonId({
     moonId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * moon_id integer
      */
-    moonId: number,
+    moonId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * moon_id integer
      */
-    moon_id: number;
+    moon_id: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * position object
      */
@@ -1178,32 +1246,32 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * The solar system this moon is in
      */
-    system_id: number;
+    system_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/moons/{moon_id}/',
       path: {
-        'moon_id': moonId,
+        moon_id: moonId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1212,9 +1280,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1231,35 +1299,46 @@ export class UniverseService {
    */
   public postUniverseNames({
     ids,
-    datasource = 'tranquility',
+    datasource = 'tranquility'
   }: {
     /**
      * The ids to resolve
      */
-    ids: Array<number>,
+    ids: Array<number>
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
-  }): CancelablePromise<Array<{
-    /**
-     * category string
-     */
-    category: 'alliance' | 'character' | 'constellation' | 'corporation' | 'inventory_type' | 'region' | 'solar_system' | 'station' | 'faction';
-    /**
-     * id integer
-     */
-    id: number;
-    /**
-     * name string
-     */
-    name: string;
-  }>> {
+    datasource?: 'tranquility'
+  }): CancelablePromise<
+    Array<{
+      /**
+       * category string
+       */
+      category:
+        | 'alliance'
+        | 'character'
+        | 'constellation'
+        | 'corporation'
+        | 'inventory_type'
+        | 'region'
+        | 'solar_system'
+        | 'station'
+        | 'faction'
+      /**
+       * id integer
+       */
+      id: number
+      /**
+       * name string
+       */
+      name: string
+    }>
+  > {
     return this.httpRequest.request({
       method: 'POST',
       url: '/universe/names/',
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       body: ids,
       errors: {
@@ -1268,9 +1347,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1290,29 +1369,29 @@ export class UniverseService {
   public getUniversePlanetsPlanetId({
     planetId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * planet_id integer
      */
-    planetId: number,
+    planetId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * planet_id integer
      */
-    planet_id: number;
+    planet_id: number
     /**
      * position object
      */
@@ -1320,36 +1399,36 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * The solar system this planet is in
      */
-    system_id: number;
+    system_id: number
     /**
      * type_id integer
      */
-    type_id: number;
+    type_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/planets/{planet_id}/',
       path: {
-        'planet_id': planetId,
+        planet_id: planetId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1358,9 +1437,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1383,52 +1462,63 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
-  }): CancelablePromise<Array<{
-    /**
-     * The alliance generally associated with this race
-     */
-    alliance_id: number;
-    /**
-     * description string
-     */
-    description: string;
-    /**
-     * name string
-     */
-    name: string;
-    /**
-     * race_id integer
-     */
-    race_id: number;
-  }>> {
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
+  }): CancelablePromise<
+    Array<{
+      /**
+       * The alliance generally associated with this race
+       */
+      alliance_id: number
+      /**
+       * description string
+       */
+      description: string
+      /**
+       * name string
+       */
+      name: string
+      /**
+       * race_id integer
+       */
+      race_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/races/',
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -1436,9 +1526,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1457,25 +1547,25 @@ export class UniverseService {
    */
   public getUniverseRegions({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/regions/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1483,9 +1573,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1507,59 +1597,68 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * region_id integer
      */
-    regionId: number,
+    regionId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * constellations array
      */
-    constellations: Array<number>;
+    constellations: Array<number>
     /**
      * description string
      */
-    description?: string;
+    description?: string
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * region_id integer
      */
-    region_id: number;
+    region_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/regions/{region_id}/',
       path: {
-        'region_id': regionId,
+        region_id: regionId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -1568,9 +1667,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1590,20 +1689,20 @@ export class UniverseService {
   public getUniverseStargatesStargateId({
     stargateId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * stargate_id integer
      */
-    stargateId: number,
+    stargateId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * destination object
@@ -1612,16 +1711,16 @@ export class UniverseService {
       /**
        * The stargate this stargate connects to
        */
-      stargate_id: number;
+      stargate_id: number
       /**
        * The solar system this stargate connects to
        */
-      system_id: number;
-    };
+      system_id: number
+    }
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * position object
      */
@@ -1629,40 +1728,40 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * stargate_id integer
      */
-    stargate_id: number;
+    stargate_id: number
     /**
      * The solar system this stargate is in
      */
-    system_id: number;
+    system_id: number
     /**
      * type_id integer
      */
-    type_id: number;
+    type_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/stargates/{stargate_id}/',
       path: {
-        'stargate_id': stargateId,
+        stargate_id: stargateId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1671,9 +1770,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1693,65 +1792,154 @@ export class UniverseService {
   public getUniverseStarsStarId({
     starId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * star_id integer
      */
-    starId: number,
+    starId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * Age of star in years
      */
-    age: number;
+    age: number
     /**
      * luminosity number
      */
-    luminosity: number;
+    luminosity: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * radius integer
      */
-    radius: number;
+    radius: number
     /**
      * solar_system_id integer
      */
-    solar_system_id: number;
+    solar_system_id: number
     /**
      * spectral_class string
      */
-    spectral_class: 'K2 V' | 'K4 V' | 'G2 V' | 'G8 V' | 'M7 V' | 'K7 V' | 'M2 V' | 'K5 V' | 'M3 V' | 'G0 V' | 'G7 V' | 'G3 V' | 'F9 V' | 'G5 V' | 'F6 V' | 'K8 V' | 'K9 V' | 'K6 V' | 'G9 V' | 'G6 V' | 'G4 VI' | 'G4 V' | 'F8 V' | 'F2 V' | 'F1 V' | 'K3 V' | 'F0 VI' | 'G1 VI' | 'G0 VI' | 'K1 V' | 'M4 V' | 'M1 V' | 'M6 V' | 'M0 V' | 'K2 IV' | 'G2 VI' | 'K0 V' | 'K5 IV' | 'F5 VI' | 'G6 VI' | 'F6 VI' | 'F2 IV' | 'G3 VI' | 'M8 V' | 'F1 VI' | 'K1 IV' | 'F7 V' | 'G5 VI' | 'M5 V' | 'G7 VI' | 'F5 V' | 'F4 VI' | 'F8 VI' | 'K3 IV' | 'F4 IV' | 'F0 V' | 'G7 IV' | 'G8 VI' | 'F2 VI' | 'F4 V' | 'F7 VI' | 'F3 V' | 'G1 V' | 'G9 VI' | 'F3 IV' | 'F9 VI' | 'M9 V' | 'K0 IV' | 'F1 IV' | 'G4 IV' | 'F3 VI' | 'K4 IV' | 'G5 IV' | 'G3 IV' | 'G1 IV' | 'K7 IV' | 'G0 IV' | 'K6 IV' | 'K9 IV' | 'G2 IV' | 'F9 IV' | 'F0 IV' | 'K8 IV' | 'G8 IV' | 'F6 IV' | 'F5 IV' | 'A0' | 'A0IV' | 'A0IV2';
+    spectral_class:
+      | 'K2 V'
+      | 'K4 V'
+      | 'G2 V'
+      | 'G8 V'
+      | 'M7 V'
+      | 'K7 V'
+      | 'M2 V'
+      | 'K5 V'
+      | 'M3 V'
+      | 'G0 V'
+      | 'G7 V'
+      | 'G3 V'
+      | 'F9 V'
+      | 'G5 V'
+      | 'F6 V'
+      | 'K8 V'
+      | 'K9 V'
+      | 'K6 V'
+      | 'G9 V'
+      | 'G6 V'
+      | 'G4 VI'
+      | 'G4 V'
+      | 'F8 V'
+      | 'F2 V'
+      | 'F1 V'
+      | 'K3 V'
+      | 'F0 VI'
+      | 'G1 VI'
+      | 'G0 VI'
+      | 'K1 V'
+      | 'M4 V'
+      | 'M1 V'
+      | 'M6 V'
+      | 'M0 V'
+      | 'K2 IV'
+      | 'G2 VI'
+      | 'K0 V'
+      | 'K5 IV'
+      | 'F5 VI'
+      | 'G6 VI'
+      | 'F6 VI'
+      | 'F2 IV'
+      | 'G3 VI'
+      | 'M8 V'
+      | 'F1 VI'
+      | 'K1 IV'
+      | 'F7 V'
+      | 'G5 VI'
+      | 'M5 V'
+      | 'G7 VI'
+      | 'F5 V'
+      | 'F4 VI'
+      | 'F8 VI'
+      | 'K3 IV'
+      | 'F4 IV'
+      | 'F0 V'
+      | 'G7 IV'
+      | 'G8 VI'
+      | 'F2 VI'
+      | 'F4 V'
+      | 'F7 VI'
+      | 'F3 V'
+      | 'G1 V'
+      | 'G9 VI'
+      | 'F3 IV'
+      | 'F9 VI'
+      | 'M9 V'
+      | 'K0 IV'
+      | 'F1 IV'
+      | 'G4 IV'
+      | 'F3 VI'
+      | 'K4 IV'
+      | 'G5 IV'
+      | 'G3 IV'
+      | 'G1 IV'
+      | 'K7 IV'
+      | 'G0 IV'
+      | 'K6 IV'
+      | 'K9 IV'
+      | 'G2 IV'
+      | 'F9 IV'
+      | 'F0 IV'
+      | 'K8 IV'
+      | 'G8 IV'
+      | 'F6 IV'
+      | 'F5 IV'
+      | 'A0'
+      | 'A0IV'
+      | 'A0IV2'
     /**
      * temperature integer
      */
-    temperature: number;
+    temperature: number
     /**
      * type_id integer
      */
-    type_id: number;
+    type_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/stars/{star_id}/',
       path: {
-        'star_id': starId,
+        star_id: starId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1759,9 +1947,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1781,37 +1969,37 @@ export class UniverseService {
   public getUniverseStationsStationId({
     stationId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * station_id integer
      */
-    stationId: number,
+    stationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<{
     /**
      * max_dockable_ship_volume number
      */
-    max_dockable_ship_volume: number;
+    max_dockable_ship_volume: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * office_rental_cost number
      */
-    office_rental_cost: number;
+    office_rental_cost: number
     /**
      * ID of the corporation that controls this station
      */
-    owner?: number;
+    owner?: number
     /**
      * position object
      */
@@ -1819,56 +2007,84 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * race_id integer
      */
-    race_id?: number;
+    race_id?: number
     /**
      * reprocessing_efficiency number
      */
-    reprocessing_efficiency: number;
+    reprocessing_efficiency: number
     /**
      * reprocessing_stations_take number
      */
-    reprocessing_stations_take: number;
+    reprocessing_stations_take: number
     /**
      * services array
      */
-    services: Array<'bounty-missions' | 'assasination-missions' | 'courier-missions' | 'interbus' | 'reprocessing-plant' | 'refinery' | 'market' | 'black-market' | 'stock-exchange' | 'cloning' | 'surgery' | 'dna-therapy' | 'repair-facilities' | 'factory' | 'labratory' | 'gambling' | 'fitting' | 'paintshop' | 'news' | 'storage' | 'insurance' | 'docking' | 'office-rental' | 'jump-clone-facility' | 'loyalty-point-store' | 'navy-offices' | 'security-offices'>;
+    services: Array<
+      | 'bounty-missions'
+      | 'assasination-missions'
+      | 'courier-missions'
+      | 'interbus'
+      | 'reprocessing-plant'
+      | 'refinery'
+      | 'market'
+      | 'black-market'
+      | 'stock-exchange'
+      | 'cloning'
+      | 'surgery'
+      | 'dna-therapy'
+      | 'repair-facilities'
+      | 'factory'
+      | 'labratory'
+      | 'gambling'
+      | 'fitting'
+      | 'paintshop'
+      | 'news'
+      | 'storage'
+      | 'insurance'
+      | 'docking'
+      | 'office-rental'
+      | 'jump-clone-facility'
+      | 'loyalty-point-store'
+      | 'navy-offices'
+      | 'security-offices'
+    >
     /**
      * station_id integer
      */
-    station_id: number;
+    station_id: number
     /**
      * The solar system this station is in
      */
-    system_id: number;
+    system_id: number
     /**
      * type_id integer
      */
-    type_id: number;
+    type_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/stations/{station_id}/',
       path: {
-        'station_id': stationId,
+        station_id: stationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -1877,9 +2093,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1901,30 +2117,30 @@ export class UniverseService {
   public getUniverseStructures({
     datasource = 'tranquility',
     filter,
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * Only list public structures that have this service online
      */
-    filter?: 'market' | 'manufacturing_basic',
+    filter?: 'market' | 'manufacturing_basic'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/structures/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'filter': filter,
+        datasource: datasource,
+        filter: filter
       },
       errors: {
         304: `Not modified`,
@@ -1932,9 +2148,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1953,33 +2169,33 @@ export class UniverseService {
     structureId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An Eve structure ID
      */
-    structureId: number,
+    structureId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
+    token?: string
   }): CancelablePromise<{
     /**
      * The full name of the structure
      */
-    name: string;
+    name: string
     /**
      * The ID of the corporation who owns this particular structure
      */
-    owner_id: number;
+    owner_id: number
     /**
      * Coordinates of the structure in Cartesian space relative to the Sun, in metres.
      *
@@ -1988,37 +2204,37 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * solar_system_id integer
      */
-    solar_system_id: number;
+    solar_system_id: number
     /**
      * type_id integer
      */
-    type_id?: number;
+    type_id?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/structures/{structure_id}/',
       path: {
-        'structure_id': structureId,
+        structure_id: structureId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -2029,9 +2245,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2050,34 +2266,36 @@ export class UniverseService {
    */
   public getUniverseSystemJumps({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * ship_jumps integer
-     */
-    ship_jumps: number;
-    /**
-     * system_id integer
-     */
-    system_id: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * ship_jumps integer
+       */
+      ship_jumps: number
+      /**
+       * system_id integer
+       */
+      system_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/system_jumps/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -2085,9 +2303,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2104,42 +2322,44 @@ export class UniverseService {
    */
   public getUniverseSystemKills({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Number of NPC ships killed in this system
-     */
-    npc_kills: number;
-    /**
-     * Number of pods killed in this system
-     */
-    pod_kills: number;
-    /**
-     * Number of player ships killed in this system
-     */
-    ship_kills: number;
-    /**
-     * system_id integer
-     */
-    system_id: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Number of NPC ships killed in this system
+       */
+      npc_kills: number
+      /**
+       * Number of pods killed in this system
+       */
+      pod_kills: number
+      /**
+       * Number of player ships killed in this system
+       */
+      ship_kills: number
+      /**
+       * system_id integer
+       */
+      system_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/system_kills/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -2147,9 +2367,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2170,25 +2390,25 @@ export class UniverseService {
    */
   public getUniverseSystems({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/systems/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -2196,9 +2416,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2220,37 +2440,46 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * system_id integer
      */
-    systemId: number,
+    systemId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * The constellation this solar system is in
      */
-    constellation_id: number;
+    constellation_id: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * planets array
      */
@@ -2258,16 +2487,16 @@ export class UniverseService {
       /**
        * asteroid_belts array
        */
-      asteroid_belts?: Array<number>;
+      asteroid_belts?: Array<number>
       /**
        * moons array
        */
-      moons?: Array<number>;
+      moons?: Array<number>
       /**
        * planet_id integer
        */
-      planet_id: number;
-    }>;
+      planet_id: number
+    }>
     /**
      * position object
      */
@@ -2275,54 +2504,54 @@ export class UniverseService {
       /**
        * x number
        */
-      'x': number;
+      x: number
       /**
        * y number
        */
-      'y': number;
+      y: number
       /**
        * z number
        */
-      'z': number;
-    };
+      z: number
+    }
     /**
      * security_class string
      */
-    security_class?: string;
+    security_class?: string
     /**
      * security_status number
      */
-    security_status: number;
+    security_status: number
     /**
      * star_id integer
      */
-    star_id?: number;
+    star_id?: number
     /**
      * stargates array
      */
-    stargates?: Array<number>;
+    stargates?: Array<number>
     /**
      * stations array
      */
-    stations?: Array<number>;
+    stations?: Array<number>
     /**
      * system_id integer
      */
-    system_id: number;
+    system_id: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/systems/{system_id}/',
       path: {
-        'system_id': systemId,
+        system_id: systemId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -2331,9 +2560,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2353,30 +2582,30 @@ export class UniverseService {
   public getUniverseTypes({
     datasource = 'tranquility',
     ifNoneMatch,
-    page = 1,
+    page = 1
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/types/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
+        datasource: datasource,
+        page: page
       },
       errors: {
         304: `Not modified`,
@@ -2384,9 +2613,9 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -2408,37 +2637,46 @@ export class UniverseService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * An Eve item type ID
      */
-    typeId: number,
+    typeId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * capacity number
      */
-    capacity?: number;
+    capacity?: number
     /**
      * description string
      */
-    description: string;
+    description: string
     /**
      * dogma_attributes array
      */
@@ -2446,12 +2684,12 @@ export class UniverseService {
       /**
        * attribute_id integer
        */
-      attribute_id: number;
+      attribute_id: number
       /**
        * value number
        */
-      value: number;
-    }>;
+      value: number
+    }>
     /**
      * dogma_effects array
      */
@@ -2459,74 +2697,74 @@ export class UniverseService {
       /**
        * effect_id integer
        */
-      effect_id: number;
+      effect_id: number
       /**
        * is_default boolean
        */
-      is_default: boolean;
-    }>;
+      is_default: boolean
+    }>
     /**
      * graphic_id integer
      */
-    graphic_id?: number;
+    graphic_id?: number
     /**
      * group_id integer
      */
-    group_id: number;
+    group_id: number
     /**
      * icon_id integer
      */
-    icon_id?: number;
+    icon_id?: number
     /**
      * This only exists for types that can be put on the market
      */
-    market_group_id?: number;
+    market_group_id?: number
     /**
      * mass number
      */
-    mass?: number;
+    mass?: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * packaged_volume number
      */
-    packaged_volume?: number;
+    packaged_volume?: number
     /**
      * portion_size integer
      */
-    portion_size?: number;
+    portion_size?: number
     /**
      * published boolean
      */
-    published: boolean;
+    published: boolean
     /**
      * radius number
      */
-    radius?: number;
+    radius?: number
     /**
      * type_id integer
      */
-    type_id: number;
+    type_id: number
     /**
      * volume number
      */
-    volume?: number;
+    volume?: number
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/universe/types/{type_id}/',
       path: {
-        'type_id': typeId,
+        type_id: typeId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -2535,9 +2773,8 @@ export class UniverseService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

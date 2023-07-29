@@ -1,7 +1,6 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
-import { create } from 'domain'
 import { EVEClient } from 'libs/esi'
 import { PrismaService } from 'libs/prisma.service'
 

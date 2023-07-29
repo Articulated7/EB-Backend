@@ -1,0 +1,19 @@
+import { Column, Entity, PrimaryColumn } from 'typeorm'
+
+@Entity()
+export class CharacterPortrait {
+  @PrimaryColumn()
+  characterId: number
+
+  @Column('text', { nullable: true })
+  px128x128: string | null
+
+  @Column('text', { nullable: true })
+  px256x256: string | null
+
+  @Column('text', { nullable: true })
+  px512x512: string | null
+
+  @Column('text', { nullable: true })
+  px64x64: string | null
+}

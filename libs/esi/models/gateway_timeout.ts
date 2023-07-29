@@ -10,10 +10,9 @@ export type gateway_timeout = {
   /**
    * Gateway timeout message
    */
-  error: string;
+  error: string
   /**
    * number of seconds the request was given
    */
-  timeout?: number;
-};
-
+  timeout?: number
+}

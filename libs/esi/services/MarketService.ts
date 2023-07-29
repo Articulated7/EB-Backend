@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class MarketService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -27,94 +26,108 @@ export class MarketService {
     characterId,
     datasource = 'tranquility',
     ifNoneMatch,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
-     */
-    duration: number;
-    /**
-     * For buy orders, the amount of ISK in escrow
-     */
-    escrow?: number;
-    /**
-     * True if the order is a bid (buy) order
-     */
-    is_buy_order?: boolean;
-    /**
-     * Signifies whether the buy/sell order was placed on behalf of a corporation.
-     */
-    is_corporation: boolean;
-    /**
-     * Date and time when this order was issued
-     */
-    issued: string;
-    /**
-     * ID of the location where order was placed
-     */
-    location_id: number;
-    /**
-     * For buy orders, the minimum quantity that will be accepted in a matching sell order
-     */
-    min_volume?: number;
-    /**
-     * Unique order ID
-     */
-    order_id: number;
-    /**
-     * Cost per unit for this order
-     */
-    price: number;
-    /**
-     * Valid order range, numbers are ranges in jumps
-     */
-    range: '1' | '10' | '2' | '20' | '3' | '30' | '4' | '40' | '5' | 'region' | 'solarsystem' | 'station';
-    /**
-     * ID of the region where order was placed
-     */
-    region_id: number;
-    /**
-     * The type ID of the item transacted in this order
-     */
-    type_id: number;
-    /**
-     * Quantity of items still required or offered
-     */
-    volume_remain: number;
-    /**
-     * Quantity of items required or offered at time order was placed
-     */
-    volume_total: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
+       */
+      duration: number
+      /**
+       * For buy orders, the amount of ISK in escrow
+       */
+      escrow?: number
+      /**
+       * True if the order is a bid (buy) order
+       */
+      is_buy_order?: boolean
+      /**
+       * Signifies whether the buy/sell order was placed on behalf of a corporation.
+       */
+      is_corporation: boolean
+      /**
+       * Date and time when this order was issued
+       */
+      issued: string
+      /**
+       * ID of the location where order was placed
+       */
+      location_id: number
+      /**
+       * For buy orders, the minimum quantity that will be accepted in a matching sell order
+       */
+      min_volume?: number
+      /**
+       * Unique order ID
+       */
+      order_id: number
+      /**
+       * Cost per unit for this order
+       */
+      price: number
+      /**
+       * Valid order range, numbers are ranges in jumps
+       */
+      range:
+        | '1'
+        | '10'
+        | '2'
+        | '20'
+        | '3'
+        | '30'
+        | '4'
+        | '40'
+        | '5'
+        | 'region'
+        | 'solarsystem'
+        | 'station'
+      /**
+       * ID of the region where order was placed
+       */
+      region_id: number
+      /**
+       * The type ID of the item transacted in this order
+       */
+      type_id: number
+      /**
+       * Quantity of items still required or offered
+       */
+      volume_remain: number
+      /**
+       * Quantity of items required or offered at time order was placed
+       */
+      volume_total: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/orders/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'token': token,
+        datasource: datasource,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -124,9 +137,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -150,103 +163,117 @@ export class MarketService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE character ID
      */
-    characterId: number,
+    characterId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
-     */
-    duration: number;
-    /**
-     * For buy orders, the amount of ISK in escrow
-     */
-    escrow?: number;
-    /**
-     * True if the order is a bid (buy) order
-     */
-    is_buy_order?: boolean;
-    /**
-     * Signifies whether the buy/sell order was placed on behalf of a corporation.
-     */
-    is_corporation: boolean;
-    /**
-     * Date and time when this order was issued
-     */
-    issued: string;
-    /**
-     * ID of the location where order was placed
-     */
-    location_id: number;
-    /**
-     * For buy orders, the minimum quantity that will be accepted in a matching sell order
-     */
-    min_volume?: number;
-    /**
-     * Unique order ID
-     */
-    order_id: number;
-    /**
-     * Cost per unit for this order
-     */
-    price: number;
-    /**
-     * Valid order range, numbers are ranges in jumps
-     */
-    range: '1' | '10' | '2' | '20' | '3' | '30' | '4' | '40' | '5' | 'region' | 'solarsystem' | 'station';
-    /**
-     * ID of the region where order was placed
-     */
-    region_id: number;
-    /**
-     * Current order state
-     */
-    state: 'cancelled' | 'expired';
-    /**
-     * The type ID of the item transacted in this order
-     */
-    type_id: number;
-    /**
-     * Quantity of items still required or offered
-     */
-    volume_remain: number;
-    /**
-     * Quantity of items required or offered at time order was placed
-     */
-    volume_total: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
+       */
+      duration: number
+      /**
+       * For buy orders, the amount of ISK in escrow
+       */
+      escrow?: number
+      /**
+       * True if the order is a bid (buy) order
+       */
+      is_buy_order?: boolean
+      /**
+       * Signifies whether the buy/sell order was placed on behalf of a corporation.
+       */
+      is_corporation: boolean
+      /**
+       * Date and time when this order was issued
+       */
+      issued: string
+      /**
+       * ID of the location where order was placed
+       */
+      location_id: number
+      /**
+       * For buy orders, the minimum quantity that will be accepted in a matching sell order
+       */
+      min_volume?: number
+      /**
+       * Unique order ID
+       */
+      order_id: number
+      /**
+       * Cost per unit for this order
+       */
+      price: number
+      /**
+       * Valid order range, numbers are ranges in jumps
+       */
+      range:
+        | '1'
+        | '10'
+        | '2'
+        | '20'
+        | '3'
+        | '30'
+        | '4'
+        | '40'
+        | '5'
+        | 'region'
+        | 'solarsystem'
+        | 'station'
+      /**
+       * ID of the region where order was placed
+       */
+      region_id: number
+      /**
+       * Current order state
+       */
+      state: 'cancelled' | 'expired'
+      /**
+       * The type ID of the item transacted in this order
+       */
+      type_id: number
+      /**
+       * Quantity of items still required or offered
+       */
+      volume_remain: number
+      /**
+       * Quantity of items required or offered at time order was placed
+       */
+      volume_total: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/characters/{character_id}/orders/history/',
       path: {
-        'character_id': characterId,
+        character_id: characterId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -256,9 +283,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -284,103 +311,117 @@ export class MarketService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
-     */
-    duration: number;
-    /**
-     * For buy orders, the amount of ISK in escrow
-     */
-    escrow?: number;
-    /**
-     * True if the order is a bid (buy) order
-     */
-    is_buy_order?: boolean;
-    /**
-     * Date and time when this order was issued
-     */
-    issued: string;
-    /**
-     * The character who issued this order
-     */
-    issued_by: number;
-    /**
-     * ID of the location where order was placed
-     */
-    location_id: number;
-    /**
-     * For buy orders, the minimum quantity that will be accepted in a matching sell order
-     */
-    min_volume?: number;
-    /**
-     * Unique order ID
-     */
-    order_id: number;
-    /**
-     * Cost per unit for this order
-     */
-    price: number;
-    /**
-     * Valid order range, numbers are ranges in jumps
-     */
-    range: '1' | '10' | '2' | '20' | '3' | '30' | '4' | '40' | '5' | 'region' | 'solarsystem' | 'station';
-    /**
-     * ID of the region where order was placed
-     */
-    region_id: number;
-    /**
-     * The type ID of the item transacted in this order
-     */
-    type_id: number;
-    /**
-     * Quantity of items still required or offered
-     */
-    volume_remain: number;
-    /**
-     * Quantity of items required or offered at time order was placed
-     */
-    volume_total: number;
-    /**
-     * The corporation wallet division used for this order.
-     */
-    wallet_division: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
+       */
+      duration: number
+      /**
+       * For buy orders, the amount of ISK in escrow
+       */
+      escrow?: number
+      /**
+       * True if the order is a bid (buy) order
+       */
+      is_buy_order?: boolean
+      /**
+       * Date and time when this order was issued
+       */
+      issued: string
+      /**
+       * The character who issued this order
+       */
+      issued_by: number
+      /**
+       * ID of the location where order was placed
+       */
+      location_id: number
+      /**
+       * For buy orders, the minimum quantity that will be accepted in a matching sell order
+       */
+      min_volume?: number
+      /**
+       * Unique order ID
+       */
+      order_id: number
+      /**
+       * Cost per unit for this order
+       */
+      price: number
+      /**
+       * Valid order range, numbers are ranges in jumps
+       */
+      range:
+        | '1'
+        | '10'
+        | '2'
+        | '20'
+        | '3'
+        | '30'
+        | '4'
+        | '40'
+        | '5'
+        | 'region'
+        | 'solarsystem'
+        | 'station'
+      /**
+       * ID of the region where order was placed
+       */
+      region_id: number
+      /**
+       * The type ID of the item transacted in this order
+       */
+      type_id: number
+      /**
+       * Quantity of items still required or offered
+       */
+      volume_remain: number
+      /**
+       * Quantity of items required or offered at time order was placed
+       */
+      volume_total: number
+      /**
+       * The corporation wallet division used for this order.
+       */
+      wallet_division: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/orders/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -390,9 +431,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -418,107 +459,121 @@ export class MarketService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * An EVE corporation ID
      */
-    corporationId: number,
+    corporationId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
-     */
-    duration: number;
-    /**
-     * For buy orders, the amount of ISK in escrow
-     */
-    escrow?: number;
-    /**
-     * True if the order is a bid (buy) order
-     */
-    is_buy_order?: boolean;
-    /**
-     * Date and time when this order was issued
-     */
-    issued: string;
-    /**
-     * The character who issued this order
-     */
-    issued_by?: number;
-    /**
-     * ID of the location where order was placed
-     */
-    location_id: number;
-    /**
-     * For buy orders, the minimum quantity that will be accepted in a matching sell order
-     */
-    min_volume?: number;
-    /**
-     * Unique order ID
-     */
-    order_id: number;
-    /**
-     * Cost per unit for this order
-     */
-    price: number;
-    /**
-     * Valid order range, numbers are ranges in jumps
-     */
-    range: '1' | '10' | '2' | '20' | '3' | '30' | '4' | '40' | '5' | 'region' | 'solarsystem' | 'station';
-    /**
-     * ID of the region where order was placed
-     */
-    region_id: number;
-    /**
-     * Current order state
-     */
-    state: 'cancelled' | 'expired';
-    /**
-     * The type ID of the item transacted in this order
-     */
-    type_id: number;
-    /**
-     * Quantity of items still required or offered
-     */
-    volume_remain: number;
-    /**
-     * Quantity of items required or offered at time order was placed
-     */
-    volume_total: number;
-    /**
-     * The corporation wallet division used for this order
-     */
-    wallet_division: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
+       */
+      duration: number
+      /**
+       * For buy orders, the amount of ISK in escrow
+       */
+      escrow?: number
+      /**
+       * True if the order is a bid (buy) order
+       */
+      is_buy_order?: boolean
+      /**
+       * Date and time when this order was issued
+       */
+      issued: string
+      /**
+       * The character who issued this order
+       */
+      issued_by?: number
+      /**
+       * ID of the location where order was placed
+       */
+      location_id: number
+      /**
+       * For buy orders, the minimum quantity that will be accepted in a matching sell order
+       */
+      min_volume?: number
+      /**
+       * Unique order ID
+       */
+      order_id: number
+      /**
+       * Cost per unit for this order
+       */
+      price: number
+      /**
+       * Valid order range, numbers are ranges in jumps
+       */
+      range:
+        | '1'
+        | '10'
+        | '2'
+        | '20'
+        | '3'
+        | '30'
+        | '4'
+        | '40'
+        | '5'
+        | 'region'
+        | 'solarsystem'
+        | 'station'
+      /**
+       * ID of the region where order was placed
+       */
+      region_id: number
+      /**
+       * Current order state
+       */
+      state: 'cancelled' | 'expired'
+      /**
+       * The type ID of the item transacted in this order
+       */
+      type_id: number
+      /**
+       * Quantity of items still required or offered
+       */
+      volume_remain: number
+      /**
+       * Quantity of items required or offered at time order was placed
+       */
+      volume_total: number
+      /**
+       * The corporation wallet division used for this order
+       */
+      wallet_division: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/corporations/{corporation_id}/orders/history/',
       path: {
-        'corporation_id': corporationId,
+        corporation_id: corporationId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -528,9 +583,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -551,25 +606,25 @@ export class MarketService {
    */
   public getMarketsGroups({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/groups/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -577,9 +632,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -603,63 +658,72 @@ export class MarketService {
     acceptLanguage = 'en',
     datasource = 'tranquility',
     ifNoneMatch,
-    language = 'en',
+    language = 'en'
   }: {
     /**
      * An Eve item group ID
      */
-    marketGroupId: number,
+    marketGroupId: number
     /**
      * Language to use in the response
      */
-    acceptLanguage?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    acceptLanguage?:
+      | 'en'
+      | 'en-us'
+      | 'de'
+      | 'fr'
+      | 'ja'
+      | 'ru'
+      | 'zh'
+      | 'ko'
+      | 'es'
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Language to use in the response, takes precedence over Accept-Language
      */
-    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es',
+    language?: 'en' | 'en-us' | 'de' | 'fr' | 'ja' | 'ru' | 'zh' | 'ko' | 'es'
   }): CancelablePromise<{
     /**
      * description string
      */
-    description: string;
+    description: string
     /**
      * market_group_id integer
      */
-    market_group_id: number;
+    market_group_id: number
     /**
      * name string
      */
-    name: string;
+    name: string
     /**
      * parent_group_id integer
      */
-    parent_group_id?: number;
+    parent_group_id?: number
     /**
      * types array
      */
-    types: Array<number>;
+    types: Array<number>
   }> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/groups/{market_group_id}/',
       path: {
-        'market_group_id': marketGroupId,
+        market_group_id: marketGroupId
       },
       headers: {
         'Accept-Language': acceptLanguage,
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'language': language,
+        datasource: datasource,
+        language: language
       },
       errors: {
         304: `Not modified`,
@@ -668,9 +732,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -691,38 +755,40 @@ export class MarketService {
    */
   public getMarketsPrices({
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * adjusted_price number
-     */
-    adjusted_price?: number;
-    /**
-     * average_price number
-     */
-    average_price?: number;
-    /**
-     * type_id integer
-     */
-    type_id: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * adjusted_price number
+       */
+      adjusted_price?: number
+      /**
+       * average_price number
+       */
+      average_price?: number
+      /**
+       * type_id integer
+       */
+      type_id: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/prices/',
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
+        datasource: datasource
       },
       errors: {
         304: `Not modified`,
@@ -730,9 +796,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -756,87 +822,101 @@ export class MarketService {
     datasource = 'tranquility',
     ifNoneMatch,
     page = 1,
-    token,
+    token
   }: {
     /**
      * Return orders in this structure
      */
-    structureId: number,
+    structureId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Access token to use if unable to set a header
      */
-    token?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * duration integer
-     */
-    duration: number;
-    /**
-     * is_buy_order boolean
-     */
-    is_buy_order: boolean;
-    /**
-     * issued string
-     */
-    issued: string;
-    /**
-     * location_id integer
-     */
-    location_id: number;
-    /**
-     * min_volume integer
-     */
-    min_volume: number;
-    /**
-     * order_id integer
-     */
-    order_id: number;
-    /**
-     * price number
-     */
-    price: number;
-    /**
-     * range string
-     */
-    range: 'station' | 'region' | 'solarsystem' | '1' | '2' | '3' | '4' | '5' | '10' | '20' | '30' | '40';
-    /**
-     * type_id integer
-     */
-    type_id: number;
-    /**
-     * volume_remain integer
-     */
-    volume_remain: number;
-    /**
-     * volume_total integer
-     */
-    volume_total: number;
-  }>> {
+    token?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * duration integer
+       */
+      duration: number
+      /**
+       * is_buy_order boolean
+       */
+      is_buy_order: boolean
+      /**
+       * issued string
+       */
+      issued: string
+      /**
+       * location_id integer
+       */
+      location_id: number
+      /**
+       * min_volume integer
+       */
+      min_volume: number
+      /**
+       * order_id integer
+       */
+      order_id: number
+      /**
+       * price number
+       */
+      price: number
+      /**
+       * range string
+       */
+      range:
+        | 'station'
+        | 'region'
+        | 'solarsystem'
+        | '1'
+        | '2'
+        | '3'
+        | '4'
+        | '5'
+        | '10'
+        | '20'
+        | '30'
+        | '40'
+      /**
+       * type_id integer
+       */
+      type_id: number
+      /**
+       * volume_remain integer
+       */
+      volume_remain: number
+      /**
+       * volume_total integer
+       */
+      volume_total: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/structures/{structure_id}/',
       path: {
-        'structure_id': structureId,
+        structure_id: structureId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
-        'token': token,
+        datasource: datasource,
+        page: page,
+        token: token
       },
       errors: {
         304: `Not modified`,
@@ -846,9 +926,9 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -871,62 +951,64 @@ export class MarketService {
     regionId,
     typeId,
     datasource = 'tranquility',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * Return statistics in this region
      */
-    regionId: number,
+    regionId: number
     /**
      * Return statistics for this type
      */
-    typeId: number,
+    typeId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
-  }): CancelablePromise<Array<{
-    /**
-     * average number
-     */
-    average: number;
-    /**
-     * The date of this historical statistic entry
-     */
-    date: string;
-    /**
-     * highest number
-     */
-    highest: number;
-    /**
-     * lowest number
-     */
-    lowest: number;
-    /**
-     * Total number of orders happened that day
-     */
-    order_count: number;
-    /**
-     * Total
-     */
-    volume: number;
-  }>> {
+    ifNoneMatch?: string
+  }): CancelablePromise<
+    Array<{
+      /**
+       * average number
+       */
+      average: number
+      /**
+       * The date of this historical statistic entry
+       */
+      date: string
+      /**
+       * highest number
+       */
+      highest: number
+      /**
+       * lowest number
+       */
+      lowest: number
+      /**
+       * Total number of orders happened that day
+       */
+      order_count: number
+      /**
+       * Total
+       */
+      volume: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/{region_id}/history/',
       path: {
-        'region_id': regionId,
+        region_id: regionId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'type_id': typeId,
+        datasource: datasource,
+        type_id: typeId
       },
       errors: {
         304: `Not modified`,
@@ -937,9 +1019,9 @@ export class MarketService {
         500: `Internal server error`,
         503: `Service unavailable`,
         504: `Gateway timeout`,
-        520: `Internal error thrown from the EVE server`,
-      },
-    });
+        520: `Internal error thrown from the EVE server`
+      }
+    })
   }
 
   /**
@@ -964,96 +1046,110 @@ export class MarketService {
     ifNoneMatch,
     orderType = 'all',
     page = 1,
-    typeId,
+    typeId
   }: {
     /**
      * Return orders in this region
      */
-    regionId: number,
+    regionId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders
      */
-    orderType?: 'buy' | 'sell' | 'all',
+    orderType?: 'buy' | 'sell' | 'all'
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
     /**
      * Return orders only for this type
      */
-    typeId?: number,
-  }): CancelablePromise<Array<{
-    /**
-     * duration integer
-     */
-    duration: number;
-    /**
-     * is_buy_order boolean
-     */
-    is_buy_order: boolean;
-    /**
-     * issued string
-     */
-    issued: string;
-    /**
-     * location_id integer
-     */
-    location_id: number;
-    /**
-     * min_volume integer
-     */
-    min_volume: number;
-    /**
-     * order_id integer
-     */
-    order_id: number;
-    /**
-     * price number
-     */
-    price: number;
-    /**
-     * range string
-     */
-    range: 'station' | 'region' | 'solarsystem' | '1' | '2' | '3' | '4' | '5' | '10' | '20' | '30' | '40';
-    /**
-     * The solar system this order was placed
-     */
-    system_id: number;
-    /**
-     * type_id integer
-     */
-    type_id: number;
-    /**
-     * volume_remain integer
-     */
-    volume_remain: number;
-    /**
-     * volume_total integer
-     */
-    volume_total: number;
-  }>> {
+    typeId?: number
+  }): CancelablePromise<
+    Array<{
+      /**
+       * duration integer
+       */
+      duration: number
+      /**
+       * is_buy_order boolean
+       */
+      is_buy_order: boolean
+      /**
+       * issued string
+       */
+      issued: string
+      /**
+       * location_id integer
+       */
+      location_id: number
+      /**
+       * min_volume integer
+       */
+      min_volume: number
+      /**
+       * order_id integer
+       */
+      order_id: number
+      /**
+       * price number
+       */
+      price: number
+      /**
+       * range string
+       */
+      range:
+        | 'station'
+        | 'region'
+        | 'solarsystem'
+        | '1'
+        | '2'
+        | '3'
+        | '4'
+        | '5'
+        | '10'
+        | '20'
+        | '30'
+        | '40'
+      /**
+       * The solar system this order was placed
+       */
+      system_id: number
+      /**
+       * type_id integer
+       */
+      type_id: number
+      /**
+       * volume_remain integer
+       */
+      volume_remain: number
+      /**
+       * volume_total integer
+       */
+      volume_total: number
+    }>
+  > {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/{region_id}/orders/',
       path: {
-        'region_id': regionId,
+        region_id: regionId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'order_type': orderType,
-        'page': page,
-        'type_id': typeId,
+        datasource: datasource,
+        order_type: orderType,
+        page: page,
+        type_id: typeId
       },
       errors: {
         304: `Not modified`,
@@ -1063,9 +1159,9 @@ export class MarketService {
         422: `Not found`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
 
   /**
@@ -1088,37 +1184,37 @@ export class MarketService {
     regionId,
     datasource = 'tranquility',
     ifNoneMatch,
-    page = 1,
+    page = 1
   }: {
     /**
      * Return statistics in this region
      */
-    regionId: number,
+    regionId: number
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
     /**
      * Which page of results to return
      */
-    page?: number,
+    page?: number
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/markets/{region_id}/types/',
       path: {
-        'region_id': regionId,
+        region_id: regionId
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'datasource': datasource,
-        'page': page,
+        datasource: datasource,
+        page: page
       },
       errors: {
         304: `Not modified`,
@@ -1126,9 +1222,8 @@ export class MarketService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }

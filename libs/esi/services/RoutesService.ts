@@ -2,11 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CancelablePromise } from '../core/CancelablePromise';
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise'
+import type { BaseHttpRequest } from '../core/BaseHttpRequest'
 
 export class RoutesService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -32,52 +31,52 @@ export class RoutesService {
     connections,
     datasource = 'tranquility',
     flag = 'shortest',
-    ifNoneMatch,
+    ifNoneMatch
   }: {
     /**
      * destination solar system ID
      */
-    destination: number,
+    destination: number
     /**
      * origin solar system ID
      */
-    origin: number,
+    origin: number
     /**
      * avoid solar system ID(s)
      */
-    avoid?: Array<number>,
+    avoid?: Array<number>
     /**
      * connected solar system pairs
      */
-    connections?: Array<any[]>,
+    connections?: Array<any[]>
     /**
      * The server name you would like data from
      */
-    datasource?: 'tranquility',
+    datasource?: 'tranquility'
     /**
      * route security preference
      */
-    flag?: 'shortest' | 'secure' | 'insecure',
+    flag?: 'shortest' | 'secure' | 'insecure'
     /**
      * ETag from a previous request. A 304 will be returned if this matches the current ETag
      */
-    ifNoneMatch?: string,
+    ifNoneMatch?: string
   }): CancelablePromise<Array<number>> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/route/{origin}/{destination}/',
       path: {
-        'destination': destination,
-        'origin': origin,
+        destination: destination,
+        origin: origin
       },
       headers: {
-        'If-None-Match': ifNoneMatch,
+        'If-None-Match': ifNoneMatch
       },
       query: {
-        'avoid': avoid,
-        'connections': connections,
-        'datasource': datasource,
-        'flag': flag,
+        avoid: avoid,
+        connections: connections,
+        datasource: datasource,
+        flag: flag
       },
       errors: {
         304: `Not modified`,
@@ -86,9 +85,8 @@ export class RoutesService {
         420: `Error limited`,
         500: `Internal server error`,
         503: `Service unavailable`,
-        504: `Gateway timeout`,
-      },
-    });
+        504: `Gateway timeout`
+      }
+    })
   }
-
 }
