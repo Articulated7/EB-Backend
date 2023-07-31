@@ -5,10 +5,10 @@ export class System {
   @PrimaryColumn()
   systemId: number
 
-  @Column({ nullable: true })
+  @Column()
   constellationId: number
 
-  @Column('text', { nullable: true })
+  @Column('text')
   name: string
 
   @Column('jsonb', { array: true, nullable: true, default: () => [] })
@@ -18,25 +18,22 @@ export class System {
         moons: number[] | undefined
         asteroid_belts: number[] | undefined
       }[]
-    | null
 
-  @Column('jsonb', { nullable: true })
-  position: { x: number; y: number; z: number } | null
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
 
   @Column('text', { nullable: true })
   securityClass: string
 
-  @Column('double precision', {
-    nullable: true
-  })
-  securityStatus: number | null
+  @Column('double precision')
+  securityStatus: number
 
   @Column({ nullable: true })
   starId: number
 
-  @Column('jsonb', { array: true, nullable: true, default: () => [] })
+  @Column('jsonb', { array: true, default: () => [] })
   stargate: number[]
 
-  @Column('jsonb', { array: true, nullable: false, default: () => [] })
+  @Column('jsonb', { array: true, default: () => [] })
   stations: number[]
 }
