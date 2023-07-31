@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm'
 @Entity()
 export class Faction {
   @Column({ nullable: true })
-  corporationId: number | null
+  corporationId: number
 
   @Column()
   description: string
@@ -11,11 +11,11 @@ export class Faction {
   @PrimaryColumn()
   factionId: number
 
-  @Column('boolean', {})
+  @Column('boolean')
   isUnique: boolean
 
   @Column({ nullable: true })
-  militiaCorporationId: number | null
+  militiaCorporationId: number
 
   @Column()
   name: string
@@ -24,7 +24,7 @@ export class Faction {
   sizeFactor: number
 
   @Column({ nullable: true })
-  solarSystemId: number | null
+  solarSystemId: number
 
   @Column()
   stationCount: number
