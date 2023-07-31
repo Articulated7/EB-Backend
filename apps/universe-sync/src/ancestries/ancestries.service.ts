@@ -1,14 +1,18 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
-import { PrismaService } from 'libs/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Ancestry } from 'libs/database'
+import { Repository } from 'typeorm'
 
 @Injectable()
 @Processor('universe-ancestries')
 export class AncestriesService extends WorkerHost {
   private readonly logger = new Logger('AncestriesService')
-  @Inject(PrismaService) private prisma: PrismaService
+
+  @InjectRepository(Ancestry)
+  ancestryRepository: Repository<Ancestry>
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
@@ -16,26 +20,19 @@ export class AncestriesService extends WorkerHost {
 
       const res = await client.universe.getUniverseAncestries({})
 
-      res.forEach(async (ancestry) => {
-        await this.prisma.ancestry.upsert({
-          where: { Id: ancestry.id },
-          update: {
-            BloodlineId: ancestry.bloodline_id,
-            Description: ancestry.description,
-            Name: ancestry.name,
-            ShortDescription: ancestry.short_description,
-            IconId: ancestry.icon_id
+      for (const ancestry of res) {
+        await this.ancestryRepository.upsert(
+          {
+            id: ancestry['id'],
+            bloodlineId: ancestry['bloodline_id'],
+            description: ancestry['description'],
+            iconId: ancestry['icon_id'],
+            name: ancestry['name'],
+            shortDescription: ancestry['short_description']
           },
-          create: {
-            Id: ancestry.id,
-            BloodlineId: ancestry.bloodline_id,
-            Description: ancestry.description,
-            Name: ancestry.name,
-            ShortDescription: ancestry.short_description,
-            IconId: ancestry.icon_id
-          }
-        })
-      })
+          ['id']
+        )
+      }
     } catch (e) {
       this.logger.error(e)
       return { error: e }
