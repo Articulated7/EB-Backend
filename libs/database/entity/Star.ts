@@ -5,29 +5,27 @@ export class Star {
   @PrimaryColumn()
   starId: number
 
-  @Column('bigint', { nullable: true })
-  age: string | null
+  @Column('bigint')
+  age: number
 
-  @Column('double precision', {
-    nullable: true
-  })
-  luminosity: number | null
+  @Column('double precision')
+  luminosity: number
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 
-  @Column('bigint', { nullable: true })
-  radius: string | null
+  @Column('bigint')
+  radius: number
 
-  @Column({ nullable: true })
-  solarSystemId: number | null
+  @Column()
+  solarSystemId: number
 
-  @Column('text', { nullable: true })
-  spectralClass: string | null
+  @Column('text')
+  spectralClass: string
 
-  @Column({ nullable: true })
-  temperature: number | null
+  @Column()
+  temperature: number
 
-  @Column({ nullable: true })
-  typeId: number | null
+  @Column()
+  typeId: number
 }
