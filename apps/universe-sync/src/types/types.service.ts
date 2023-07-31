@@ -2,14 +2,46 @@ import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Type } from 'libs/database'
+import { Repository } from 'typeorm'
 
 @Injectable()
 @Processor('universe-types')
 export class TypesService extends WorkerHost {
   private readonly logger = new Logger('TypesService')
 
+  @InjectRepository(Type)
+  typeRepository: Repository<Type>
+
   async process(job: Job<any, any, string>): Promise<any> {
     try {
+      const client = new EVEClient()
+      const res = await client.universe.getUniverseTypesTypeId({
+        typeId: job.data.id
+      })
+
+      await this.typeRepository.upsert(
+        {
+          id: res.type_id,
+          capacity: res.capacity,
+          description: res.description,
+          dogmaAttributes: res.dogma_attributes,
+          dogmaEffects: res.dogma_effects,
+          graphicId: res.graphic_id,
+          groupId: res.group_id,
+          iconId: res.icon_id,
+          marketGroupId: res.market_group_id,
+          mass: res.mass,
+          name: res.name,
+          packagedVolume: res.packaged_volume,
+          portionSize: res.portion_size,
+          published: res.published,
+          radius: res.radius,
+          volume: res.volume
+        },
+        ['id']
+      )
     } catch (e) {
       this.logger.error(e)
       return { error: e }

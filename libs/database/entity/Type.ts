@@ -11,42 +11,42 @@ export class Type {
   @Column('text')
   description: string
 
-  @Column('jsonb', { nullable: true })
-  dogmaAttributes: object | null
+  @Column('jsonb', { nullable: true, array: true, default: () => [] })
+  dogmaAttributes: { attribute_id: number; value: number }[]
 
-  @Column('jsonb', { nullable: true })
-  dogmaEffects: object | null
+  @Column('jsonb', { nullable: true, array: true, default: () => [] })
+  dogmaEffects: { effect_id: number; is_default: boolean }[]
 
   @Column({ nullable: true })
-  graphicId: number | null
+  graphicId: number
 
   @Column()
   groupId: number
 
   @Column({ nullable: true })
-  iconId: number | null
+  iconId: number
 
   @Column({ nullable: true })
-  marketGroupId: number | null
+  marketGroupId: number
 
   @Column({ nullable: true })
-  mass: number | null
+  mass: number
 
   @Column('text')
   name: string
 
-  @Column('double precision')
-  packagedVolume: number | null
+  @Column('double precision', { nullable: true })
+  packagedVolume: number
 
   @Column({ nullable: true })
-  portionSize: number | null
+  portionSize: number
 
   @Column()
   published: boolean
 
   @Column({ nullable: true })
-  radius: number | null
+  radius: number
 
   @Column({ nullable: true })
-  volume: number | null
+  volume: number
 }
