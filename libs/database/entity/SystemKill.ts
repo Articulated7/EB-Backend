@@ -3,14 +3,14 @@ import { Column, Entity, Index } from 'typeorm'
 @Index(['systemId', 'timestamp'], { unique: true })
 @Entity()
 export class SystemKill {
-  @Column({ nullable: true })
-  npcKills: number | null
+  @Column()
+  npcKills: number
 
-  @Column({ nullable: true })
-  podKills: number | null
+  @Column()
+  podKills: number
 
-  @Column({ nullable: true })
-  shipKills: number | null
+  @Column()
+  shipKills: number
 
   @Column({ primary: true })
   systemId: number
