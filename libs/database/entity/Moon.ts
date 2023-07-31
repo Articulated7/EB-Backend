@@ -5,12 +5,12 @@ export class Moon {
   @PrimaryColumn()
   moonId: number
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 
-  @Column('jsonb', { nullable: true })
-  position: object | null
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
 
-  @Column({ nullable: true })
-  systemId: number | null
+  @Column()
+  systemId: number
 }
