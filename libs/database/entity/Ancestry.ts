@@ -12,11 +12,11 @@ export class Ancestry {
   description: string
 
   @Column({ nullable: true })
-  iconId: number | null
+  iconId: number
 
   @Column('text')
   name: string
 
   @Column('text', { nullable: true })
-  shortDescription: string | null
+  shortDescription: string
 }

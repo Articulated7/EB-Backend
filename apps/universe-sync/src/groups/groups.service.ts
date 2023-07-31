@@ -1,10 +1,10 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
 import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
-import { EVEClient } from 'libs/esi'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Group } from 'libs/database'
+import { publicClient } from 'libs/esi'
 
 @Injectable()
 @Processor('universe-groups')
@@ -16,7 +16,7 @@ export class GroupsService extends WorkerHost {
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
-      const client = new EVEClient()
+      const client = publicClient()
       const res = await client.universe.getUniverseGroupsGroupId({
         groupId: job.data.id
       })

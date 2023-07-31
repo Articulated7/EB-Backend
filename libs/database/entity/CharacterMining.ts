@@ -1,10 +1,7 @@
 import { Column, Entity, Index } from 'typeorm'
 
 @Entity()
-@Index(
-  ['characterId', 'date', 'solarSystemId', 'typeId'],
-  { unique: true }
-)
+@Index(['characterId', 'date', 'solarSystemId', 'typeId'], { unique: true })
 export class CharacterMining {
   @Column({ primary: true })
   characterId: number

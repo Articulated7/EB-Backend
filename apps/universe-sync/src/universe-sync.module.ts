@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { BullModule } from '@nestjs/bullmq'
 import {
-  universeTypesQueue,
   universeAncestriesQueue,
   universeBloodlinesQueue,
   universeCategoriesQueue,
@@ -19,7 +18,8 @@ import {
   universeStructuresQueue,
   universeSystemJumpsQueue,
   universeSystemKillsQueue,
-  universeSystemsQueue
+  universeSystemsQueue,
+  universeTypesQueue
 } from 'libs/queues'
 import { GroupsService } from './groups/groups.service'
 import { AncestriesService } from './ancestries/ancestries.service'
@@ -41,8 +41,27 @@ import { SystemJumpsService } from './system-jumps/system-jumps.service'
 import { SystemKillsService } from './system-kills/system-kills.service'
 import { SystemsService } from './systems/systems.service'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { SyncStatus } from '../../../libs/database/entity/SyncStatus'
-import { Ancestry, Bloodline, System } from '../../../libs/database'
+import {
+  Ancestry,
+  Bloodline,
+  Category,
+  Constellation,
+  Faction,
+  Graphic,
+  Group,
+  Moon,
+  Planet,
+  Race,
+  Region,
+  Star,
+  Stargate,
+  Station,
+  Structure,
+  System,
+  SystemJump,
+  SystemKill,
+  Type
+} from '../../../libs/database'
 
 @Module({
   imports: [
@@ -64,7 +83,27 @@ import { Ancestry, Bloodline, System } from '../../../libs/database'
         }
       }
     }),
-    TypeOrmModule.forFeature([Ancestry, Bloodline, System]),
+    TypeOrmModule.forFeature([
+      Ancestry,
+      Bloodline,
+      Category,
+      Constellation,
+      Faction,
+      Graphic,
+      Group,
+      Moon,
+      Planet,
+      Race,
+      Region,
+      Stargate,
+      Star,
+      Station,
+      Structure,
+      SystemJump,
+      SystemKill,
+      System,
+      Type
+    ]),
     BullModule.forRoot({
       connection: {
         host: process.env.REDIS_HOST || 'localhost',

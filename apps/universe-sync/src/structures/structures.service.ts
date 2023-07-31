@@ -1,10 +1,10 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
 import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
-import { EVEClient } from 'libs/esi'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Structure } from 'libs/database'
 import { Repository } from 'typeorm'
+import { publicClient } from 'libs/esi'
 
 @Injectable()
 @Processor('universe-strucutres')
@@ -16,7 +16,7 @@ export class StructuresService extends WorkerHost {
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
-      const client = new EVEClient()
+      const client = publicClient()
       const res = await client.universe.getUniverseStructuresStructureId({
         structureId: job.data.id
       })

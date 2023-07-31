@@ -41,6 +41,15 @@ services:
         APP: status-sync
     env_file: .env.compose
 
+  universe-sync:
+    image: evebot/universe-sync:dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP: universe-sync
+    env_file: .env.compose
+
 volumes:
   postgres-data:
   redis-data:

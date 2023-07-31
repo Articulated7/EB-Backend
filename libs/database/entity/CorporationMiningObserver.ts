@@ -1,9 +1,6 @@
 import { Column, Entity, Index } from 'typeorm'
 
-@Index(
-  ['characterId', 'lastUpDated', 'observerId', 'typeId'],
-  { unique: true }
-)
+@Index(['characterId', 'lastUpDated', 'observerId', 'typeId'], { unique: true })
 @Entity()
 export class CorporationMiningObserver {
   @Column('bigint', { primary: true })

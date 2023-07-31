@@ -11,7 +11,7 @@ export class System {
   @Column('text')
   name: string
 
-  @Column('jsonb', { array: true, nullable: true, default: () => [] })
+  @Column('jsonb', { array: true, nullable: true, default: [] })
   planet:
     | {
         planet_id: number
@@ -31,9 +31,9 @@ export class System {
   @Column({ nullable: true })
   starId: number
 
-  @Column('jsonb', { array: true, default: () => [] })
+  @Column('jsonb', { array: true, default: [] })
   stargate: number[]
 
-  @Column('jsonb', { array: true, default: () => [] })
+  @Column('jsonb', { array: true, default: [] })
   stations: number[]
 }

@@ -1,7 +1,7 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
-import { EVEClient } from 'libs/esi'
+import { publicClient } from 'libs/esi'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Type } from 'libs/database'
 import { Repository } from 'typeorm'
@@ -16,32 +16,39 @@ export class TypesService extends WorkerHost {
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
-      const client = new EVEClient()
-      const res = await client.universe.getUniverseTypesTypeId({
-        typeId: job.data.id
+      const client = publicClient()
+
+      const typeRes = await client.universe.getUniverseTypes({
+        page: job.data.page
       })
 
-      await this.typeRepository.upsert(
-        {
-          id: res.type_id,
-          capacity: res.capacity,
-          description: res.description,
-          dogmaAttributes: res.dogma_attributes,
-          dogmaEffects: res.dogma_effects,
-          graphicId: res.graphic_id,
-          groupId: res.group_id,
-          iconId: res.icon_id,
-          marketGroupId: res.market_group_id,
-          mass: res.mass,
-          name: res.name,
-          packagedVolume: res.packaged_volume,
-          portionSize: res.portion_size,
-          published: res.published,
-          radius: res.radius,
-          volume: res.volume
-        },
-        ['id']
-      )
+      for (const t of typeRes) {
+        const res = await client.universe.getUniverseTypesTypeId({
+          typeId: t
+        })
+
+        await this.typeRepository.upsert(
+          {
+            id: res.type_id,
+            capacity: res.capacity,
+            description: res.description,
+            dogmaAttributes: res.dogma_attributes,
+            dogmaEffects: res.dogma_effects,
+            graphicId: res.graphic_id,
+            groupId: res.group_id,
+            iconId: res.icon_id,
+            marketGroupId: res.market_group_id,
+            mass: res.mass,
+            name: res.name,
+            packagedVolume: res.packaged_volume,
+            portionSize: res.portion_size,
+            published: res.published,
+            radius: res.radius,
+            volume: res.volume
+          },
+          ['id']
+        )
+      }
     } catch (e) {
       this.logger.error(e)
       return { error: e }

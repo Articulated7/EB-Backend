@@ -11,10 +11,10 @@ export class Type {
   @Column('text')
   description: string
 
-  @Column('jsonb', { nullable: true, array: true, default: () => [] })
-  dogmaAttributes: { attribute_id: number; value: number }[]
+  @Column('jsonb', { nullable: true, array: false, default: [] })
+  dogmaAttributes: { attribute_id: number; value: number | bigint }[]
 
-  @Column('jsonb', { nullable: true, array: true, default: () => [] })
+  @Column('jsonb', { nullable: true, array: false, default: [] })
   dogmaEffects: { effect_id: number; is_default: boolean }[]
 
   @Column({ nullable: true })
@@ -29,8 +29,8 @@ export class Type {
   @Column({ nullable: true })
   marketGroupId: number
 
-  @Column({ nullable: true })
-  mass: number
+  @Column('double precision', { nullable: true })
+  mass: number | bigint
 
   @Column('text')
   name: string
@@ -44,9 +44,9 @@ export class Type {
   @Column()
   published: boolean
 
-  @Column({ nullable: true })
+  @Column('double precision', { nullable: true })
   radius: number
 
-  @Column({ nullable: true })
+  @Column('double precision', { nullable: true })
   volume: number
 }

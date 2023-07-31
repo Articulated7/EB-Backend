@@ -1,10 +1,10 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
-import { EVEClient } from 'libs/esi'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Bloodline } from 'libs/database'
 import { Repository } from 'typeorm'
+import { publicClient } from 'libs/esi'
 
 @Injectable()
 @Processor('universe-bloodlines')
@@ -15,7 +15,7 @@ export class BloodlinesService extends WorkerHost {
   bloodlineRepository: Repository<Bloodline>
 
   async process(job: Job<any, any, string>): Promise<any> {
-    const client = new EVEClient()
+    const client = publicClient()
 
     const res = await client.universe.getUniverseBloodlines({})
 
