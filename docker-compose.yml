@@ -20,6 +20,27 @@ services:
     volumes:
       - redis-data:/data
 
+# Apps
+  scheduler:
+    image: evebot/scheduler:dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP: scheduler
+    env_file: .env.compose
+    ports:
+      - '3000:3000'
+
+  status:
+    image: evebot/status-sync:dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP: status-sync
+    env_file: .env.compose
+
 volumes:
   postgres-data:
   redis-data:

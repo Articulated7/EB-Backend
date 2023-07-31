@@ -6,23 +6,23 @@ export class Graphic {
   graphicId: number
 
   @Column('text', { nullable: true })
-  collisionFile: string | null
+  collisionFile: string
 
   @Column('text', { nullable: true })
-  graphicFile: string | null
+  graphicFile: string
 
   @Column('text', { nullable: true })
-  iconFolder: string | null
+  iconFolder: string
 
   @Column('text', { nullable: true })
-  sofDna: string | null
+  sofDna: string
 
   @Column('text', { nullable: true })
-  sofFationName: string | null
+  sofFationName: string
 
   @Column('text', { nullable: true })
-  sofHullName: string | null
+  sofHullName: string
 
   @Column('text', { nullable: true })
-  sofRaceName: string | null
+  sofRaceName: string
 }

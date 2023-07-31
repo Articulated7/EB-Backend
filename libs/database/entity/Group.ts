@@ -11,9 +11,9 @@ export class Group {
   @Column()
   name: string
 
-  @Column('boolean', {})
+  @Column('boolean')
   published: boolean
 
-  @Column('jsonb', {})
+  @Column('jsonb', { array: true })
   types: object
 }

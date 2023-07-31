@@ -6,19 +6,25 @@ export class System {
   systemId: number
 
   @Column({ nullable: true })
-  constellationId: number | null
+  constellationId: number
 
   @Column('text', { nullable: true })
-  name: string | null
+  name: string
+
+  @Column('jsonb', { array: true, nullable: true, default: () => [] })
+  planet:
+    | {
+        planet_id: number
+        moons: number[] | undefined
+        asteroid_belts: number[] | undefined
+      }[]
+    | null
 
   @Column('jsonb', { nullable: true })
-  planet: object | null
-
-  @Column('jsonb', { nullable: true })
-  position: object | null
+  position: { x: number; y: number; z: number } | null
 
   @Column('text', { nullable: true })
-  securityClass: string | null
+  securityClass: string
 
   @Column('double precision', {
     nullable: true
@@ -26,11 +32,11 @@ export class System {
   securityStatus: number | null
 
   @Column({ nullable: true })
-  starId: number | null
+  starId: number
 
-  @Column('jsonb', { nullable: true })
-  stargate: object | null
+  @Column('jsonb', { array: true, nullable: true, default: () => [] })
+  stargate: number[]
 
-  @Column('jsonb', { nullable: true })
-  stations: object | null
+  @Column('jsonb', { array: true, nullable: false, default: () => [] })
+  stations: number[]
 }

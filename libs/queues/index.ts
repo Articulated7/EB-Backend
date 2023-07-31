@@ -12,6 +12,10 @@ export const universeAncestriesQueue = BullModule.registerQueue({
   name: 'universe-ancestries'
 })
 
+export const universeAsteroidBeltQueue = BullModule.registerQueue({
+  name: 'universe-asteroid-belt'
+})
+
 export const universeBloodlinesQueue = BullModule.registerQueue({
   name: 'universe-bloodlines'
 })
