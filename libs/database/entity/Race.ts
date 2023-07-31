@@ -2,14 +2,14 @@ import { Column, Entity, Index, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class Race {
-  @Column({ nullable: true })
-  allianceId: number | null
+  @Column()
+  allianceId: number
 
-  @Column('text', { nullable: true })
-  description: string | null
+  @Column('text')
+  description: string
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 
   @PrimaryColumn()
   raceId: number
