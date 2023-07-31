@@ -1,5 +1,5 @@
-GET http://localhost:3000/trigger/universe/systems
+GET http://localhost:39017/trigger/universe/systems
 
 
 ###
-GET http://localhost:3000/trigger/universe/types
+GET http://localhost:39017/trigger/universe/types
