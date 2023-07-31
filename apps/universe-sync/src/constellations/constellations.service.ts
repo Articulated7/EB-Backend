@@ -1,18 +1,36 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
-import { PrismaService } from 'libs/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Constellation } from 'libs/database'
 
 @Injectable()
 @Processor('universe-factions')
 export class ConstellationsService extends WorkerHost {
   private readonly logger = new Logger('ConstellationsService')
-  @Inject(PrismaService) private prisma: PrismaService
+
+  @InjectRepository(Constellation)
+  constellationRepository: Repository<Constellation>
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
       const client = new EVEClient()
+      const res =
+        await client.universe.getUniverseConstellationsConstellationId({
+          constellationId: job.data.id
+        })
+      await this.constellationRepository.upsert(
+        {
+          constellationId: res.constellation_id,
+          name: res.name,
+          position: res.position,
+          regionId: res.region_id,
+          system: res.systems
+        },
+        ['constellationId']
+      )
     } catch (e) {
       this.logger.error(e)
       return { error: e }
@@ -23,6 +41,7 @@ export class ConstellationsService extends WorkerHost {
   onCompleted() {
     this.logger.log('completed')
   }
+
   @OnWorkerEvent('failed')
   onFailed() {
     this.logger.log('failed')
