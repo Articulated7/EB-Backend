@@ -5,8 +5,8 @@ export class Category {
   @PrimaryColumn()
   id: number
 
-  @Column('jsonb')
-  group: object
+  @Column('jsonb', { array: true })
+  group: number[]
 
   @Column('text')
   name: string
