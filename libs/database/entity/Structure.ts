@@ -5,18 +5,18 @@ export class Structure {
   @PrimaryColumn('bigint')
   structureId: string
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
+
+  @Column()
+  ownerId: number
+
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
+
+  @Column()
+  solarSystemId: number
 
   @Column({ nullable: true })
-  ownerId: number | null
-
-  @Column('jsonb', { nullable: true })
-  position: object | null
-
-  @Column({ nullable: true })
-  solarSystemId: number | null
-
-  @Column({ nullable: true })
-  typeId: number | null
+  typeId: number
 }
