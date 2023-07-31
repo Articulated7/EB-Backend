@@ -5,15 +5,15 @@ export class Constellation {
   @PrimaryColumn()
   constellationId: number
 
-  @Column('text', { nullable: true })
+  @Column('text')
   name: string | null
 
-  @Column('jsonb', { nullable: true })
-  position: object | null
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
 
-  @Column({ nullable: true })
-  regionId: number | null
+  @Column()
+  regionId: number
 
-  @Column('jsonb', { nullable: true })
-  system: object | null
+  @Column('jsonb', { array: true })
+  system: number[]
 }
