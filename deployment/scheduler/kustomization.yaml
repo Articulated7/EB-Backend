@@ -1,0 +1,10 @@
+namespace: evebot
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+images:
+  - name: registry.homelab.monster/evebot/scheduler
+    newName: registry.homelab.monster/evebot/scheduler
+    newTag: 0.0.2

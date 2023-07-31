@@ -1,0 +1,10 @@
+namespace: evebot
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+images:
+  - name: registry.homelab.monster/evebot/status-sync
+    newName: registry.homelab.monster/evebot/status-sync
+    newTag: 0.0.1

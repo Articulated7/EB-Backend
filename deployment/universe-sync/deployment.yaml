@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: universe-sync
+  labels:
+    app: universe-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: universe-sync
+  template:
+    metadata:
+      name: universe-sync
+      labels:
+        app: universe-sync
+    spec:
+      containers:
+        - name: universe-sync
+          image: registry.homelab.monster/evebot/universe-sync:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          env:
+            - name: ENVIRONMENT
+              value: production
+            - name: TZ
+              value: UTC
+            - name: REDIS_HOST
+              value: redis-redis-ha-haproxy
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_HOST_TASKS
+              value: redis-redis-ha-haproxy
+            - name: REDIS_PORT_TASKS
+              value: "6379"
+            - name: DATABASE_NAME
+              value: evebot
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: evebot-secrets
+                  key: DATABASE_HOST
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: evebot-secrets
+                  key: DATABASE_PORT
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: evebot-secrets
+                  key: DATABASE_USERNAME
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: evebot-secrets
+                  key: DATABASE_PASSWORD
+      restartPolicy: Always

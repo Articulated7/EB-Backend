@@ -1,0 +1,10 @@
+namespace: evebot
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+images:
+  - name: registry.homelab.monster/evebot/universe-sync
+    newName: registry.homelab.monster/evebot/universe-sync
+    newTag: 0.0.2
