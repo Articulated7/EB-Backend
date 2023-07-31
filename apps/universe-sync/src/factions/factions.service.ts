@@ -2,13 +2,17 @@ import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
 import { Inject, Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
-import { PrismaService } from 'libs/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Faction } from 'libs/database'
 
 @Injectable()
 @Processor('universe-factions')
 export class FactionsService extends WorkerHost {
   private readonly logger = new Logger('FactionsService')
-  @Inject(PrismaService) private prisma: PrismaService
+
+  @InjectRepository(Faction)
+  factionRepository: Repository<Faction>
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
@@ -16,34 +20,23 @@ export class FactionsService extends WorkerHost {
 
       const res = await client.universe.getUniverseFactions({})
 
-      res.forEach(async (faction) => {
-        await this.prisma.factions.upsert({
-          where: { FactionId: faction.faction_id },
-          update: {
-            Name: faction.name,
-            Description: faction.description,
-            MilitiaCorporationId: faction.militia_corporation_id,
-            SizeFactor: faction.size_factor,
-            StationCount: faction.station_count,
-            StationSystemCount: faction.station_system_count,
-            IsUnique: faction.is_unique,
-            SolarSystemId: faction.solar_system_id,
-            CorporationId: faction.corporation_id
+      for (const faction of res) {
+        await this.factionRepository.upsert(
+          {
+            corporationId: faction.corporation_id,
+            description: faction.description,
+            factionId: faction.faction_id,
+            isUnique: faction.is_unique,
+            militiaCorporationId: faction.militia_corporation_id,
+            name: faction.name,
+            sizeFactor: faction.size_factor,
+            solarSystemId: faction.solar_system_id,
+            stationCount: faction.station_count,
+            stationSystemCount: faction.station_system_count
           },
-          create: {
-            FactionId: faction.faction_id,
-            Name: faction.name,
-            Description: faction.description,
-            MilitiaCorporationId: faction.militia_corporation_id,
-            SizeFactor: faction.size_factor,
-            StationCount: faction.station_count,
-            StationSystemCount: faction.station_system_count,
-            IsUnique: faction.is_unique,
-            SolarSystemId: faction.solar_system_id,
-            CorporationId: faction.corporation_id
-          }
-        })
-      })
+          ['faction_id']
+        )
+      }
     } catch (e) {
       this.logger.error(e)
       return { error: e }
