@@ -86,4 +86,11 @@ export class SchedulerController {
     await this.universeScheduler.scheduleRegionsSync()
     return 'ok'
   }
+
+  @Get('/trigger/universe/planets')
+  async triggerUniversePlanetsSync() {
+    this.logger.debug('triggering universe planets sync')
+    await this.universeScheduler.schedulePlanetsSync()
+    return 'ok'
+  }
 }

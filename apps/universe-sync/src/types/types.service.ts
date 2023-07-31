@@ -7,7 +7,7 @@ import { Type } from 'libs/database'
 import { Repository } from 'typeorm'
 
 @Injectable()
-@Processor('universe-types')
+@Processor('universe-types', { concurrency: 10 })
 export class TypesService extends WorkerHost {
   private readonly logger = new Logger('TypesService')
 
@@ -26,6 +26,10 @@ export class TypesService extends WorkerHost {
         const res = await client.universe.getUniverseTypesTypeId({
           typeId: t
         })
+
+        // const dogmaToBigInt = res.dogma_attributes.map((a) => {
+        //   return { ...a, value: BigInt(a.value) }
+        // })
 
         await this.typeRepository.upsert(
           {
