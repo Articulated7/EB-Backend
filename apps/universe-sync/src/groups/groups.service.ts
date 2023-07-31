@@ -1,14 +1,18 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
-import { PrismaService } from 'libs/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Group } from 'libs/database'
 
 @Injectable()
 @Processor('universe-groups')
 export class GroupsService extends WorkerHost {
   private readonly logger = new Logger('AncestriesService')
-  @Inject(PrismaService) private prisma: PrismaService
+
+  @InjectRepository(Group)
+  groupRepository: Repository<Group>
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
@@ -17,22 +21,16 @@ export class GroupsService extends WorkerHost {
         groupId: job.data.id
       })
 
-      await this.prisma.group.upsert({
-        where: { GroupId: res.group_id },
-        update: {
-          Name: res.name,
-          CategoryId: res.category_id,
-          Published: res.published,
-          Types: res.types
+      await this.groupRepository.upsert(
+        {
+          groupId: res.group_id,
+          categoryId: res.category_id,
+          name: res.name,
+          published: res.published,
+          types: res.types
         },
-        create: {
-          GroupId: res.group_id,
-          Name: res.name,
-          CategoryId: res.category_id,
-          Published: res.published,
-          Types: res.types
-        }
-      })
+        ['groupId']
+      )
     } catch (e) {
       this.logger.error(e)
       return { error: e }
