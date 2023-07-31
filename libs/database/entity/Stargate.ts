@@ -5,18 +5,18 @@ export class Stargate {
   @PrimaryColumn()
   stargateId: number
 
-  @Column('jsonb', { nullable: true })
-  destination: object | null
+  @Column('jsonb')
+  destination: { stargate_id: number; system_id: number }
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 
-  @Column('jsonb', { nullable: true })
-  position: object | null
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
 
-  @Column({ nullable: true })
-  systemId: number | null
+  @Column()
+  systemId: number
 
-  @Column({ nullable: true })
-  typeId: number | null
+  @Column()
+  typeId: number
 }
