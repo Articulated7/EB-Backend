@@ -5,44 +5,36 @@ export class Station {
   @PrimaryColumn()
   stationId: number
 
-  @Column('double precision', {
-    nullable: true
-  })
-  maxDockableShipVolume: number | null
+  @Column('double precision')
+  maxDockableShipVolume: number
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 
-  @Column('double precision', {
-    nullable: true
-  })
-  officeRentalCost: number | null
+  @Column('double precision')
+  officeRentalCost: number
 
   @Column({ nullable: true })
-  owner: number | null
+  owner: number
 
-  @Column('jsonb', { nullable: true })
-  position: object | null
-
-  @Column({ nullable: true })
-  raceId: number | null
-
-  @Column('double precision', {
-    nullable: true
-  })
-  reprocessingEfficiency: number | null
-
-  @Column('double precision', {
-    nullable: true
-  })
-  reprocessingStationsTake: number | null
-
-  @Column('jsonb', { nullable: true })
-  services: object | null
+  @Column('jsonb')
+  position: { x: number; y: number; z: number }
 
   @Column({ nullable: true })
-  systemId: number | null
+  raceId: number
 
-  @Column({ nullable: true })
-  typeId: number | null
+  @Column('double precision')
+  reprocessingEfficiency: number
+
+  @Column('double precision')
+  reprocessingStationsTake: number
+
+  @Column('jsonb', { array: true })
+  services: string[]
+
+  @Column()
+  systemId: number
+
+  @Column()
+  typeId: number
 }
