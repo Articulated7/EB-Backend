@@ -61,7 +61,7 @@ import {
   SystemJump,
   SystemKill,
   Type
-} from '../../../libs/database'
+} from 'libs/database'
 
 @Module({
   imports: [
@@ -106,8 +106,8 @@ import {
     ]),
     BullModule.forRoot({
       connection: {
-        host: process.env.REDIS_HOST || 'localhost',
-        port: parseInt(process.env.REDIS_PORT) || 6379
+        host: process.env.REDIS_HOST_TASKS || 'localhost',
+        port: parseInt(process.env.REDIS_PORT_TASKS) || 6379
       }
     }),
     universeTypesQueue,

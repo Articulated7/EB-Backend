@@ -62,8 +62,8 @@ import { System } from 'libs/database'
     ScheduleModule.forRoot(),
     BullModule.forRoot({
       connection: {
-        host: process.env.REDIS_HOST || 'localhost',
-        port: parseInt(process.env.REDIS_PORT) || 6379
+        host: process.env.REDIS_HOST_TASKS || 'localhost',
+        port: parseInt(process.env.REDIS_PORT_TASKS) || 6379
       }
     }),
     statusQueue,

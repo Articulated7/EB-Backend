@@ -11,7 +11,7 @@ export class System {
   @Column('text')
   name: string
 
-  @Column('jsonb', { array: true, nullable: true, default: [] })
+  @Column('jsonb', { array: false, nullable: true, default: [] })
   planet:
     | {
         planet_id: number
