@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { BullModule } from '@nestjs/bullmq'
-import { PrismaService } from 'libs/prisma.service'
 import {
   universeTypesQueue,
   universeAncestriesQueue,
@@ -41,9 +40,31 @@ import { StructuresService } from './structures/structures.service'
 import { SystemJumpsService } from './system-jumps/system-jumps.service'
 import { SystemKillsService } from './system-kills/system-kills.service'
 import { SystemsService } from './systems/systems.service'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { SyncStatus } from '../../../libs/database/entity/SyncStatus'
+import { Ancestry, Bloodline, System } from '../../../libs/database'
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DATABASE_HOST ?? 'localhost',
+      port: Number(process.env.DATABASE_PORT) ?? 5432,
+      username: process.env.DATABASE_USERNAME ?? 'postgres',
+      password: process.env.DATABASE_PASSWORD ?? 'postgres',
+      database: process.env.DATABASE_NAME ?? 'postgres',
+      autoLoadEntities: true,
+      synchronize: false,
+      cache: {
+        type: 'ioredis',
+        options: {
+          host: process.env.REDIS_HOST || 'localhost',
+          port: parseInt(process.env.REDIS_PORT) || 6379,
+          db: 2
+        }
+      }
+    }),
+    TypeOrmModule.forFeature([Ancestry, Bloodline, System]),
     BullModule.forRoot({
       connection: {
         host: process.env.REDIS_HOST || 'localhost',
@@ -73,7 +94,6 @@ import { SystemsService } from './systems/systems.service'
   ],
   controllers: [],
   providers: [
-    PrismaService,
     GroupsService,
     CatagoriesService,
     AncestriesService,
