@@ -1,14 +1,18 @@
 import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq'
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Job } from 'bullmq'
 import { EVEClient } from 'libs/esi'
-import { PrismaService } from 'libs/prisma.service'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Category } from 'libs/database'
 
 @Injectable()
 @Processor('universe-catagories')
 export class CatagoriesService extends WorkerHost {
   private readonly logger = new Logger('CatagoriesService')
-  @Inject(PrismaService) private prisma: PrismaService
+
+  @InjectRepository(Category)
+  categoryRepository: Repository<Category>
 
   async process(job: Job<any, any, string>): Promise<any> {
     try {
@@ -18,20 +22,15 @@ export class CatagoriesService extends WorkerHost {
         categoryId: job.data.id
       })
 
-      await this.prisma.categories.upsert({
-        where: { CategoryId: res.category_id },
-        update: {
-          Name: res.name,
-          Published: res.published,
-          Group: res.groups
+      await this.categoryRepository.upsert(
+        {
+          id: res.category_id,
+          group: res.groups,
+          name: res.name,
+          published: res.published
         },
-        create: {
-          CategoryId: res.category_id,
-          Name: res.name,
-          Published: res.published,
-          Group: res.groups
-        }
-      })
+        ['id']
+      )
     } catch (e) {
       this.logger.error(e)
       return { error: e }
