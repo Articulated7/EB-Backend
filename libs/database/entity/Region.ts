@@ -5,12 +5,12 @@ export class Region {
   @PrimaryColumn()
   regionId: number
 
-  @Column('jsonb', { nullable: true })
-  constellation: object | null
+  @Column('jsonb', { array: true })
+  constellation: number[]
 
   @Column('text', { nullable: true })
-  description: string | null
+  description: string
 
-  @Column('text', { nullable: true })
-  name: string | null
+  @Column('text')
+  name: string
 }
