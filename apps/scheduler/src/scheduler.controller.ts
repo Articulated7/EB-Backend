@@ -72,4 +72,18 @@ export class SchedulerController {
     await this.universeScheduler.scheduleSystemKillsSync()
     return 'ok'
   }
+
+  @Get('/trigger/universe/systems')
+  async triggerUniverseSystemsSync() {
+    this.logger.debug('triggering universe system sync')
+    await this.universeScheduler.scheduleSystemsSync()
+    return 'ok'
+  }
+
+  @Get('/trigger/universe/regions')
+  async triggerUniverseRegionsSync() {
+    this.logger.debug('triggering universe regions sync')
+    await this.universeScheduler.scheduleRegionsSync()
+    return 'ok'
+  }
 }
