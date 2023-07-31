@@ -9,6 +9,7 @@ import { BullMQAdapter } from '@bull-board/api/bullMQAdapter'
 import {
   statusQueue,
   universeAncestriesQueue,
+  universeAsteroidBeltQueue,
   universeBloodlinesQueue,
   universeCategoriesQueue,
   universeConstellationsQueue,
@@ -32,6 +33,7 @@ import { UniverseSchedulerService } from './universe.service'
 import { HttpModule } from '@nestjs/axios'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { SyncStatus } from 'libs/database/entity/SyncStatus'
+import { System } from 'libs/database'
 
 @Module({
   imports: [
@@ -42,9 +44,18 @@ import { SyncStatus } from 'libs/database/entity/SyncStatus'
       username: process.env.DATABASE_USERNAME ?? 'postgres',
       password: process.env.DATABASE_PASSWORD ?? 'postgres',
       database: process.env.DATABASE_NAME ?? 'postgres',
-      entities: [SyncStatus],
-      synchronize: true
+      autoLoadEntities: true,
+      synchronize: false,
+      cache: {
+        type: 'ioredis',
+        options: {
+          host: process.env.REDIS_HOST || 'localhost',
+          port: parseInt(process.env.REDIS_PORT) || 6379,
+          db: 2
+        }
+      }
     }),
+    TypeOrmModule.forFeature([SyncStatus, System]),
     HttpModule.register({
       timeout: 5000
     }),
@@ -76,6 +87,7 @@ import { SyncStatus } from 'libs/database/entity/SyncStatus'
     universeSystemJumpsQueue,
     universeSystemKillsQueue,
     universeSystemsQueue,
+    universeAsteroidBeltQueue,
     BullBoardModule.forRoot({
       route: '/status',
       adapter: ExpressAdapter // Or FastifyAdapter from `@bull-board/fastify`
@@ -158,6 +170,10 @@ import { SyncStatus } from 'libs/database/entity/SyncStatus'
     }),
     BullBoardModule.forFeature({
       name: 'universe-systems',
+      adapter: BullMQAdapter
+    }),
+    BullBoardModule.forFeature({
+      name: 'universe-asteroid-belt',
       adapter: BullMQAdapter
     })
   ],
